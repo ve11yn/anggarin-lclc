@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { useUser } from "../contexts/userContext";
 import { getUserDetails, UserDetails } from "../contexts/userService";
 import Navigation2 from "./navigation2";
+import "../css/budgetPlanDetails.css";
 
 
 const BudgetPlanDetailsPage = () => {
