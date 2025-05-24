@@ -1,0 +1,192 @@
+/* Dashboard Layout */
+
+.page-container {
+    display: flex;
+    min-height: 100vh;
+    background-color: #f8f9fa;
+}
+
+.main-content-dashboard {
+    flex-grow: 1;
+    padding: 2rem 3rem;
+    margin-left: 250px;
+    transition: margin 0.3s ease;
+}
+
+.main-content-dashboard.nav-collapsed {
+    margin-left: 80px;
+}
+
+
+/* Header */
+
+.main-content-dashboard h3 {
+    color: #6c757d;
+    margin-bottom: 0.5rem;
+    font-size: 1.25rem;
+    font-weight: 400;
+}
+
+.main-content-dashboard h2 {
+    color: #2d3436;
+    margin-bottom: 2rem;
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+
+/* Fund Stats Cards */
+
+.fund-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.total-budget,
+.remaining-budget {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.total-budget h2,
+.remaining-budget h2 {
+    color: #2d3436;
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.total-budget p,
+.remaining-budget p {
+    color: #6c757d;
+    font-size: 1rem;
+}
+
+
+/* Budget Plans Section */
+
+.content-container {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 3rem;
+}
+
+.your-plans h3 {
+    color: #2d3436;
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.plan-card {
+    background: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.plan-card h4 {
+    color: #2d3436;
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.plan-card p {
+    color: #6c757d;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+}
+
+.plan-metrics {
+    display: flex;
+    justify-content: space-between;
+    color: #6c757d;
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+}
+
+.plan-metrics span {
+    margin-right: 1.5rem;
+}
+
+
+/* Inbox Section */
+
+.inbox-preview {
+    background: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.inbox-preview h3 {
+    color: #2d3436;
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+}
+
+.inbox-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.inbox-table td {
+    padding: 1rem 0;
+    border-bottom: 1px solid #eee;
+    font-size: 0.9rem;
+}
+
+.inbox-table tr:last-child td {
+    border-bottom: none;
+}
+
+
+/* Buttons */
+
+button {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+button:hover {
+    background: #0056b3;
+    transform: translateY(-1px);
+}
+
+
+/* Responsive Design */
+
+@media (max-width: 1200px) {
+    .content-container {
+        grid-template-columns: 1fr;
+    }
+    .fund-stats {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-content-dashboard {
+        padding: 1.5rem;
+        margin-left: 0;
+    }
+    .plan-metrics {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+}

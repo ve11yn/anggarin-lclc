@@ -1,0 +1,261 @@
+.landing-page {
+    width: 100%;
+    max-width: 1200px;
+    min-height: 100vh;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    box-sizing: border-box;
+}
+
+#section1 {
+    width: 100%;
+    max-width: 900px;
+    margin: 200px auto 100px auto;
+    text-align: center;
+    background: none;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 48px 24px 36px 24px;
+}
+
+#section1 h1 {
+    font-size: 2.5rem;
+    margin: 0.2em 0;
+    color: #222;
+}
+
+#section1-button {
+    margin-top: 32px;
+    display: flex;
+    gap: 18px;
+    justify-content: center;
+}
+
+#section1-button button {
+    border: 1.5px solid #222;
+    background: #fff;
+    color: #222;
+    padding: 12px 28px;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+
+#section1-button button:hover {
+    background: grey;
+    color: #fff;
+}
+
+.info-how-testimonials-section {
+    width: 100%;
+    max-width: 1100px;
+    margin: 40px auto 0 auto;
+    background: linear-gradient(#f0f0f0, #173782);
+    border-radius: 28px;
+    padding: 100px 24px 100px 24px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 48px;
+    row-gap: 150px;
+}
+
+.stats-description {
+    text-align: center;
+}
+
+.stats-row {
+    display: flex;
+    justify-content: center;
+    gap: 80px;
+    margin: 18px 0 10px 0;
+}
+
+.stats-description h2 {
+    margin-bottom: 4px;
+    color: #111;
+}
+
+.stats-description p {
+    color: #444;
+    font-size: 1.1rem;
+}
+
+.how-we-work {
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.how-steps {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
+    width: 80%;
+}
+
+.how-steps>div {
+    background: #fff;
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    padding: 40px 2px;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.03);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-self: center;
+}
+
+.how-steps h1 {
+    color: black;
+}
+
+.how-steps h3 {
+    margin: 0 0 10px 0;
+    font-size: 1.15rem;
+    color: #111;
+}
+
+.how-steps p {
+    max-width: 60%;
+    text-align: center;
+}
+
+.testimonials {
+    width: 100%;
+    text-align: center;
+    margin-top: 24px;
+    display: flex;
+    flex-direction: row;
+}
+
+.testimonials p .testimonials h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.testimonial-left p {
+    color: white;
+}
+
+.testimonial-intro {
+    color: #fff;
+    margin-bottom: 28px;
+    font-size: 1.08rem;
+}
+
+.testimonial-cards {
+    display: flex;
+    flex-direction: row;
+    gap: 28px;
+    justify-content: center;
+    margin-bottom: 24px;
+}
+
+.testimonial-card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 28px 32px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+    font-size: 1.1rem;
+    color: #222;
+    max-width: 420px;
+    min-width: 260px;
+    text-align: left;
+}
+
+.testimonial-card span {
+    display: block;
+    margin-top: 15px;
+    color: #666;
+    font-size: 0.97rem;
+}
+
+.try-now-btn {
+    padding: 10px 30px;
+    border-radius: 20px;
+    border: 1.5px solid #222;
+    background: #fff;
+    color: #222;
+    font-weight: 500;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.2s, color 0.2s;
+}
+
+.try-now-btn:hover {
+    background: grey;
+    color: #fff;
+}
+
+@media (max-width: 900px) {
+    .how-steps,
+    .testimonial-cards {
+        flex-direction: column;
+        display: flex;
+        gap: 18px;
+        align-items: center;
+    }
+    .how-steps {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    #section1,
+    .info-how-testimonials-section {
+        padding: 18px 4px;
+    }
+    .testimonial-cards {
+        gap: 10px;
+    }
+}
+
+.description-text {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.info-how-testimonials-section,
+.testimonials,
+.how-we-work,
+.stats-description {
+    width: 100%;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+    padding-left: 16px;
+    padding-right: 16px;
+    justify-content: center;
+    align-items: center;
+}
+
+.stats-description p {
+    max-width: 600px;
+    text-align: center;
+}
+
+.testimonials h2 {
+    color: white;
+}
+
+.stats-description {
+    justify-content: center;
+    align-items: center;
+}

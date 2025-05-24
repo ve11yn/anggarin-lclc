@@ -1,0 +1,175 @@
+/* Budget Plan Page Styles */
+
+.budget-plan-container {
+    display: flex;
+    min-height: 100vh;
+    background-color: #f8f9fa;
+}
+
+.create-plan-section,
+.personal-plans-section {
+    flex: 1;
+    padding: 2rem 3rem;
+    margin-left: 250px;
+}
+
+
+/* Create Plan Form */
+
+.create-plan-section h2 {
+    font-size: 2rem;
+    color: #2d3436;
+    margin-bottom: 2rem;
+}
+
+.create-plan-section form {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+}
+
+.create-plan-section input,
+.create-plan-section textarea {
+    width: 100%;
+    padding: 0.8rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1rem;
+}
+
+.create-plan-section textarea {
+    height: 100px;
+    resize: vertical;
+}
+
+
+/* Plan Cards Grid */
+
+.personal-plans-section h2 {
+    font-size: 2rem;
+    color: #2d3436;
+    margin-bottom: 2rem;
+}
+
+.plans-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.plan-card {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.plan-card:hover {
+    transform: translateY(-3px);
+}
+
+.plan-card h3 {
+    font-size: 1.25rem;
+    color: #2d3436;
+    margin-bottom: 0.5rem;
+}
+
+.plan-card p {
+    color: #6c757d;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+
+/* Status Badges */
+
+.status-badges {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.status-badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.status-badge.private {
+    background: #e9ecef;
+    color: #495057;
+}
+
+.status-badge.head {
+    background: #007bff;
+    color: white;
+}
+
+
+/* Fund Display */
+
+.remaining-fund {
+    margin: 1.5rem 0;
+}
+
+.remaining-fund h4 {
+    color: #6c757d;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+.remaining-fund p {
+    font-size: 1.5rem;
+    color: #2d3436;
+    font-weight: 600;
+    margin: 0;
+}
+
+
+/* Members Count */
+
+.members-count {
+    color: #6c757d;
+    font-size: 0.9rem;
+    border-top: 1px solid #eee;
+    padding-top: 1rem;
+    margin-top: 1rem;
+}
+
+
+/* Buttons */
+
+button {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+button:hover {
+    background: #0056b3;
+}
+
+
+/* Responsive Design */
+
+@media (max-width: 768px) {
+    .create-plan-section,
+    .personal-plans-section {
+        margin-left: 0;
+        padding: 1.5rem;
+    }
+    .plans-grid {
+        grid-template-columns: 1fr;
+    }
+}

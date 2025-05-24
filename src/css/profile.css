@@ -1,0 +1,142 @@
+.profile-container {
+    background-color: #fff;
+    min-height: 100vh;
+    padding: 2rem 2rem;
+    /* top/bottom 2rem, left/right 1rem */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-box {
+    width: 90vw;
+    /* Make it responsive based on viewport */
+    max-width: 1000px;
+    /* Allow it to grow more on large screens */
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 5rem 3rem;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    display: flex;
+    gap: 3rem;
+}
+
+.profile-left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile-picture {
+    width: 150px;
+    height: 150px;
+    /* Set the height for the profile picture container */
+    overflow: hidden;
+    border-radius: 50%;
+    margin: 0 auto;
+    border: 0.5px solid #7d7d7d;
+    /* Border color */
+}
+
+.profile-picture img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Ensures the image is scaled and cropped correctly */
+}
+
+.profile-picture-button {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 8px 16px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.profile-picture-button:hover {
+    background-color: #7d7d7d;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.profile-id {
+    margin-top: 0.5rem;
+    color: #777;
+    font-size: 15px;
+}
+
+.profile-button {
+    padding: 0.5rem 1rem;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    margin-top: 0.5rem;
+    cursor: pointer;
+}
+
+.profile-button:hover {
+    background-color: #7d7d7d;
+    /* A darker shade of blue on hover */
+}
+
+.profile-button.cancel {
+    background-color: #888;
+}
+
+.profile-back-button {
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #333;
+}
+
+.profile-right {
+    flex: 3;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem 2rem;
+}
+
+.profile-field {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+}
+
+.profile-label {
+    font-weight: bold;
+    margin-bottom: 0.3rem;
+}
+
+.profile-input,
+.profile-textarea {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.profile-textarea {
+    grid-column: span 2;
+    resize: vertical;
+    min-height: 80px;
+}
+
+.profile-buttons {
+    grid-column: 2;
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+}
