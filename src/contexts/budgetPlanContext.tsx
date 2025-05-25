@@ -1,10 +1,12 @@
 import { arrayUnion, collection, doc, getDoc, getDocs, increment, query, setDoc, updateDoc, where } from "firebase/firestore";
 import { createContext, ReactNode, useContext, useReducer } from "react";
 import { db } from "../main";
+import { FundRequest } from "./fundRequestContext";
 
 
 export interface BudgetPlanContext {
   planId: string;
+  ownerId: string;
   userId: string; 
   title: string;
   description: string;
@@ -109,6 +111,7 @@ const budgetPlanReducer = (state: BudgetPlanState, action: BudgetPlanAction): Bu
         const newPlan: BudgetPlanContext = {
             ...planData,
             planId: planRef.id,
+            ownerId: planData.userId,
             createdAt: new Date().toISOString(),
             remainingFund: planData.totalFund,
             fundRequests: []
@@ -154,19 +157,23 @@ const budgetPlanReducer = (state: BudgetPlanState, action: BudgetPlanAction): Bu
     };
 
     const addFundRequest = async (planId: string, requestId: string) => {
-        await updateDoc(doc(db, "budgetPlan", planId), { // Singular
-            fundRequests: arrayUnion(requestId),
-            updatedAt: new Date().toISOString()
-        });
-        dispatch({ type: "ADD_FUND_REQUEST", payload: { planId, requestId } });
+      await updateDoc(doc(db, "budgetPlan", planId), {
+        fundRequests: arrayUnion(requestId),
+        updatedAt: new Date().toISOString()
+      });
+      dispatch({ 
+        type: "ADD_FUND_REQUEST", 
+        payload: { planId, requestId } 
+      });
     };
 
+    // In BudgetPlanContext.tsx
     const updateFunds = async (planId: string, amount: number) => {
-        await updateDoc(doc(db, "budgetPlan", planId), { // Singular
-            remainingFund: increment(amount),
-            updatedAt: new Date().toISOString()
-        });
-        dispatch({ type: "UPDATE_FUNDS", payload: { planId, amount } });
+      await updateDoc(doc(db, "budgetPlan", planId), {
+        remainingFund: increment(amount),
+        updatedAt: new Date().toISOString()
+      });
+      dispatch({ type: "UPDATE_FUNDS", payload: { planId, amount } });
     };
 
     const getUserPlans = async (userId: string) => {

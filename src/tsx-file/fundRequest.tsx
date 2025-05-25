@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { useFundRequests } from "../contexts/fundRequestContext";
+import { useFundRequests, } from "../contexts/fundRequestContext";
 import { useBudgetPlans } from "../contexts/budgetPlanContext";
 import { useUser } from "../contexts/userContext";
 import { useEffect, useState } from "react";
@@ -10,12 +10,41 @@ import Navigation2 from "./navigation2";
 const FundRequest = () => {
     const { planId } = useParams();
     const { createRequest, getPlanRequests, state } = useFundRequests();
-    const { getPlan } = useBudgetPlans();
     const { state: userState } = useUser();
     const [newRequest, setNewRequest] = useState({
         amount: 0,
         description: ""
     });
+
+
+    const { approveRequest, rejectRequest } = useFundRequests();
+    const { updateFunds, getPlan } = useBudgetPlans();
+
+    const handleApproveRequest = async (requestId: string) => {
+        try {
+            const request = state.requests.find(r => r.requestId === requestId);
+            if (!request) return;
+
+            // Approve the request
+            await approveRequest(requestId, userState.uid, updateFunds);
+            
+            // Refresh data
+            const updatedPlan = await getPlan(planId!);
+            const updatedRequests = await getPlanRequests(planId!);
+        } catch (error) {
+            console.error("Approval failed:", error);
+        }
+    };
+
+    const handleReject = async (requestId: string) => {
+        const reason = prompt("Enter rejection reason:") || "No reason provided";
+        try {
+            await rejectRequest(requestId, userState.uid, reason);
+            await getPlanRequests(planId!);
+        } catch (error) {
+            console.error("Rejection failed:", error);
+        }
+    };
 
     useEffect(() => {
         if (planId) {
@@ -38,9 +67,23 @@ const FundRequest = () => {
         setNewRequest({ amount: 0, description: "" });
     };
 
-    const handleApproveRequest = async (requestId: string) => {
-        // Implement approval logic
-    };
+
+
+    // const handleApprove = async (requestId: string) => {
+    //     try {
+    //         const request = state.requests.find(r => r.requestId === requestId);
+    //         if (!request) return;
+
+    //         await approveRequest(requestId, userState.uid);
+    //         await updateFunds(request.planId, -request.fundAmount);
+            
+    //         // Refresh data
+    //         await getPlanRequests(request.planId);
+    //     } catch (error) {
+    //         console.error("Approval failed:", error);
+    //     }
+    // };
+
 
     return (
         <div className="fund-request-container">
@@ -80,7 +123,9 @@ const FundRequest = () => {
                                 <button onClick={() => handleApproveRequest(request.requestId)}>
                                     Approve
                                 </button>
-                                <button>Reject</button>
+                                <button onClick={() => handleReject(request.requestId)}>
+                                    Reject
+                                </button>
                             </div>
                         )}
                     </div>

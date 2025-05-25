@@ -1,6 +1,5 @@
 import Navigation1 from "./navigation1";
 import "../css/landing.css"
-import "../css/index.css"
 
 const Landing = () => {
     return (

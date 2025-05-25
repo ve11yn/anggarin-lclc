@@ -3,12 +3,14 @@
     max-width: 1200px;
     min-height: 100vh;
     margin: 0 auto;
+    height: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     background: #fff;
     box-sizing: border-box;
+    overflow: visible;
 }
 
 #section1 {
@@ -258,4 +260,13 @@
 .stats-description {
     justify-content: center;
     align-items: center;
+}
+
+html,
+body {
+    overflow-x: hidden;
+    overflow-y: auto;
+    /* Ensures vertical scrolling is enabled */
+    height: auto;
+    /* Don't restrict height */
 }

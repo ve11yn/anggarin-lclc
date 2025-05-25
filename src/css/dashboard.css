@@ -3,6 +3,7 @@
 .page-container {
     display: flex;
     min-height: 100vh;
+    min-width: 80vw;
     background-color: #f8f9fa;
 }
 

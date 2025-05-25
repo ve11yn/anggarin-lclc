@@ -5,7 +5,7 @@ import { UserContext } from "../contexts/userContext";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "../main";
 import "../css/register-login-details.css";
-
+import "../css/index.css";
 
 const Details = () => {
     const auth = getAuth();

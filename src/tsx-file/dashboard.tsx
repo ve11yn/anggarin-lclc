@@ -4,12 +4,14 @@ import { useBudgetPlans } from "../contexts/budgetPlanContext";
 import Navigation2 from "./navigation2";
 import { Link } from "react-router-dom";
 import "../css/dashboard.css";
+import { useFundRequests } from "../contexts/fundRequestContext";
 
 
 const Dashboard = () => {
     const { state: userState } = useContext(UserContext);
     const { getAllPlans, state: budgetPlanState } = useBudgetPlans();
     const [isNavCollapsed, setIsNavCollapsed] = useState(false);
+    const {state: fundRequestState} = useFundRequests();
 
     useEffect(() => {
         getAllPlans();
@@ -66,9 +68,17 @@ const Dashboard = () => {
                         <div className="inbox-preview">
                             <h3>Inbox</h3>
                             <Link to="/inbox">
-                                <button>View Inbox</button>
+                                <button>View Inbox ({fundRequestState.requests.filter(r => r.status === 'pending').length})</button>
                             </Link>
-                            {/* Add recent requests preview here */}
+                            {fundRequestState.requests
+                                .filter(r => r.status === 'pending')
+                                .slice(0, 3)
+                                .map(request => (
+                                    <div key={request.requestId} className="inbox-item">
+                                        <span>{request.requesterName}</span>
+                                        <span>Rp{request.fundAmount.toLocaleString()}</span>
+                                    </div>
+                                ))}
                         </div>
                     </div>
                 </div>

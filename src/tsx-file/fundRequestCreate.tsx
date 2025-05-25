@@ -3,35 +3,61 @@ import { useFundRequests } from "../contexts/fundRequestContext";
 import { useUser } from "../contexts/userContext";
 import { useState } from "react";
 import Navigation2 from "./navigation2";
+import { useBudgetPlans } from "../contexts/budgetPlanContext";
 
 
 const CreateFundRequest = () => {
-    const { planId } = useParams();
+  const { planId } = useParams();
   const { createRequest } = useFundRequests();
   const { state: userState } = useUser();
   const [formData, setFormData] = useState({
     amount: 0,
     description: ''
   });
+  const { addFundRequest } = useBudgetPlans(); // Add this
 
+
+  // const handleSubmit = async (e: React.FormEvent) => {
+  //   e.preventDefault();
+  //   if (!planId || !userState.uid) return;
+
+  //   try {
+  //     await createRequest({
+  //       planId,
+  //       requesterId: userState.uid,
+  //       requesterName: userState.name || 'Anonymous',
+  //       fundAmount: formData.amount,
+  //       description: formData.description
+  //     });
+  //     alert('Request created successfully!');
+  //     setFormData({ amount: 0, description: '' });
+  //   } catch (error) {
+  //     console.error('Error creating request:', error);
+  //     alert('Failed to create request');
+  //   }
+  // };
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!planId || !userState.uid) return;
+      if (!planId || !userState.uid) return;
 
-    try {
-      await createRequest({
-        planId,
-        requesterId: userState.uid,
-        requesterName: userState.name || 'Anonymous',
-        fundAmount: formData.amount,
-        description: formData.description
-      });
-      alert('Request created successfully!');
-      setFormData({ amount: 0, description: '' });
-    } catch (error) {
-      console.error('Error creating request:', error);
-      alert('Failed to create request');
-    }
+      try {
+          const requestId = await createRequest({
+              planId,
+              requesterId: userState.uid,
+              requesterName: userState.name || 'Anonymous',
+              fundAmount: formData.amount,
+              description: formData.description
+          });
+          
+          // Add request to budget plan
+          await addFundRequest(planId, requestId);
+          
+          alert('Request created successfully!');
+          setFormData({ amount: 0, description: '' });
+      } catch (error) {
+          console.error('Error creating request:', error);
+          alert('Failed to create request');
+      }
   };
 
   return (

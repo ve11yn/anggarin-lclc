@@ -1,6 +1,7 @@
 import { collection, deleteDoc, doc, getDoc, getDocs, query, setDoc, updateDoc, where } from "firebase/firestore";
 import { createContext, ReactNode, useContext, useReducer } from "react";
 import { db } from "../main";
+import { useBudgetPlans } from "./budgetPlanContext";
 
 
 export interface FundRequest {
@@ -35,7 +36,7 @@ const FundRequestContext = createContext<{
     state: FundRequestState;
     createRequest: (request: Omit<FundRequest, "requestId" | "status" | "createdAt" | "updatedAt"> & {requesterName: string}) => Promise<string>;
     getRequest: (requestId: string) => Promise<FundRequest | null>;
-    approveRequest: (requestId: string, approverId: string) => Promise<void>;
+    approveRequest: (requestId: string, approverId: string, updatePlanFunds: (planId: string, amount: number) => Promise<void>) => Promise<void>;
     rejectRequest: (requestId: string, rejectorId: string, reason?: string) => Promise<void>;
     completeRequest: (requestId: string, txHash: string) => Promise<void>;
     getPlanRequests: (planId: string) => Promise<FundRequest[]>;
@@ -78,8 +79,6 @@ export const FundRequestProvider = ({ children }: { children: ReactNode }) => {
     const [state, dispatch] = useReducer(fundRequestReducer, {
         requests: [],
         currentRequest: null
-
-        
     });
 
     const createRequest = async (request: Omit<FundRequest, "requestId" | "status" | "createdAt" | "updatedAt">) => {
@@ -108,26 +107,6 @@ export const FundRequestProvider = ({ children }: { children: ReactNode }) => {
         return null;
     };
 
-    const approveRequest = async (requestId: string, approverId: string) => {
-        const requestRef = doc(db, "fundRequest", requestId);
-        await updateDoc(requestRef, {
-          status: "approved",
-          approverId,
-          approvedAt: new Date().toISOString()
-        });
-        // Add blockchain integration here
-      };
-      
-      const rejectRequest = async (requestId: string, rejectorId: string, reason: string) => {
-        const requestRef = doc(db, "fundRequest", requestId);
-        await updateDoc(requestRef, {
-          status: "rejected",
-          approverId: rejectorId,
-          rejectionReason: reason,
-          updatedAt: new Date().toISOString()
-        });
-      };
-
     const completeRequest = async (requestId: string, txHash: string) => {
         const update: Partial<FundRequest> = {
             status: "completed",
@@ -141,6 +120,42 @@ export const FundRequestProvider = ({ children }: { children: ReactNode }) => {
             dispatch({ type: "UPDATE_REQUEST", payload: updatedRequest });
         }
     };
+
+    const approveRequest = async (
+        requestId: string, 
+        approverId: string,
+        updatePlanFunds: (planId: string, amount: number) => Promise<void>
+    ) => {
+        const requestRef = doc(db, "fundRequest", requestId);
+        const requestSnap = await getDoc(requestRef);
+        const request = requestSnap.data() as FundRequest;
+      
+        // Update request status
+        await updateDoc(requestRef, {
+            status: "approved",
+            approverId,
+            approvedAt: new Date().toISOString()
+        });
+      
+        // Update plan funds using injected function
+        await updatePlanFunds(request.planId, -request.fundAmount);
+    };
+
+      // Keep rejectRequest in FundRequestContext
+const rejectRequest = async (
+    requestId: string, 
+    rejectorId: string, 
+    reason?: string  // Make reason optional
+) => {
+    const requestRef = doc(db, "fundRequest", requestId);
+    await updateDoc(requestRef, {
+        status: "rejected",
+        approverId: rejectorId,
+        rejectionReason: reason || "No reason provided",  // Handle undefined case
+        updatedAt: new Date().toISOString()
+    });
+};
+
 
     const getPlanRequests = async (planId: string) => {
         const q = query(
@@ -174,7 +189,8 @@ export const FundRequestProvider = ({ children }: { children: ReactNode }) => {
             state,
             createRequest,
             getRequest,
-            approveRequest,
+            approveRequest: (requestId, approverId, updatePlanFunds) => 
+                approveRequest(requestId, approverId, updatePlanFunds),
             rejectRequest,
             completeRequest,
             getPlanRequests,
