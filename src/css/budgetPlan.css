@@ -50,6 +50,7 @@ span {
     height: 100vh;
     width: 100vw;
     background-color: #f8f9fa;
+    margin-top: 100px;
 }
 
 .create-plan-section,

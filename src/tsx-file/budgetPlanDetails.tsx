@@ -8,6 +8,7 @@ import { useUser } from "../contexts/userContext";
 import { getUserDetails, UserDetails } from "../contexts/userService";
 import Navigation2 from "./navigation2";
 import "../css/budgetPlanDetails.css";
+import Navigation3 from "./navigation3";
 
 
 const BudgetPlanDetailsPage = () => {
@@ -76,6 +77,7 @@ const BudgetPlanDetailsPage = () => {
 
   return (
     <div className="budgetplan-details-container">
+      <Navigation3/>
       <Navigation2 />
       
       <div className="details-header-section">
@@ -98,9 +100,9 @@ const BudgetPlanDetailsPage = () => {
 
       <div className="details-content">
         <div className="details-content-grid">
-          <div className="budget-overview">
-            <h3>Budget Overview</h3>
-            <div className="budget-breakdown">
+          <div className="budget-overview" style={{border:'none'}}>
+            <h3 style={{fontSize:'1rem'}}>Budget Overview</h3>
+            {/* <div className="budget-breakdown">
               <div className="budget-item">
                 <div>
                     <p>Total Fund</p>
@@ -112,34 +114,68 @@ const BudgetPlanDetailsPage = () => {
                     <span>Rp. {plan.remainingFund}</span>
                 </div>
               </div>
-            </div>
+            </div> */}
+
+      <div className="detail-chart-container">
+          <div className="detail-donut-chart">
+              <div className="detail-chart-circle">
+                  <div 
+                      className="detail-chart-segment"
+                      style={{
+                          background: `conic-gradient(
+                              #1a237e ${(plan.remainingFund / plan.totalFund) * 360}deg,
+                              #e0e0e0 ${(plan.remainingFund / plan.totalFund) * 360}deg 360deg
+                          )`
+                      }}
+                  ></div>
+              </div>
+              <div className="detail-chart-center">
+                  <div className="detail-total-text">
+                      Rp. {plan.totalFund.toLocaleString()}
+                  </div>
+                  <div className="detail-total-label">Total Fund</div>
+              </div>
+          </div>
+
+          <div className="detail-plan-stats">
+              <div className="detail-stat-item">
+                  <h4 className="detail-stat-heading">Remaining</h4>
+                  <span className="detail-stat-value">
+                      Rp. {plan.remainingFund.toLocaleString()}
+                  </span>
+              </div>
+              <div className="detail-members-count">
+                  Members: {plan.members.length}
+              </div>
+          </div>
+      </div>
           </div>
 
           <div className="latest-events">
-            <h3>Latest Fund Requests</h3>
+            <h3 style={{fontSize:'1rem'}}>Fund Requests</h3>
             {requests.map(request => (
               <div key={request.requestId} className="request-item">
                 <div className="request-header">
-                  <span>{request.requesterName}</span>
+                  <span style={{fontSize: '0.7rem'}}>{request.requesterName}</span>
                   <span>{new Date(request.createdAt).toLocaleDateString()}</span>
                 </div>
                 <div className="request-details">
                   <span>Rp{request.fundAmount.toLocaleString()}</span>
-                  <span>{request.status}</span>
+                  <span className={`request-status ${request.status}`}>{request.status}</span>
                 </div>
               </div>
             ))}
           </div>
           <div className="members-list">
-            <h3>Members</h3>
+            <h3 style={{fontSize:'1rem'}}>Members</h3>
             {memberDetails.map(member => (
                 <div key={member.uid} className="member-item">
                     <div className="member-info">
-                        <span>{member.name}</span>
+                        <span style={{fontSize:'1rem', marginBottom:'0px'}}><b>{member.name}</b></span>
                         <span>{member.position}</span>
                     </div>
                     <div className="member-contact">
-                        <span>{member.email}</span>
+                      <span>{member.email}</span>
                         <span>Joined: {new Date(member.joinDate || "").toLocaleDateString()}</span>
                     </div>
                 </div>

@@ -1,22 +1,27 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
+import { matchPath, useLocation } from "react-router-dom";
 import { Bell } from "lucide-react";
 import "../css/navigation3.css";
 import logo from "../assets/anggarin-blue.jpg";
 
 const getPageNameFromPath = (pathname) => {
-  const routeMap = {
-    "/dashboard": "Dashboard",
-    "/profile": "My Profile",
-    "/budgetPlan": "Budget Plans",
-    "/budgetPlanDetails": "Budget Plan Details",
-    "/budgetPlanPublic": "Public Budget Plans",
-    "/fundRequest": "Fund Requests",
-    "/fundRequestCreate": "Create Fund Request",
-    "/inbox": "Fund Request Inbox",
-  };
+  const routePatterns = [
+    { pattern: "/fund-requests/:planId/create", name: "Create Fund Request" },
+    { pattern: "/budgetPlan/:planId", name: "Budget Plan Details" },
+    { pattern: "/fundRequest/:planId", name: "Fund Requests" },
+    { pattern: "/dashboard", name: "Dashboard" },
+    { pattern: "/profile", name: "My Profile" },
+    { pattern: "/budgetPlan", name: "Budget Plans" },
+    { pattern: "/publicBudgetPlan", name: "Public Budget Plans" }, // Changed to match actual route
+    { pattern: "/inbox", name: "Fund Request Inbox" },
+    // Add more patterns as needed
+  ];
 
-  return routeMap[pathname] || "Page";
+  const matchedRoute = routePatterns.find(({ pattern }) => 
+    matchPath(pattern, pathname)
+  );
+
+  return matchedRoute?.name || "Page";
 };
 
 const excludedPaths = ["/login", "/register", "/landing", "details"];

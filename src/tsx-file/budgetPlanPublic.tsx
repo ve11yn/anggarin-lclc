@@ -3,6 +3,7 @@ import { useBudgetPlans } from "../contexts/budgetPlanContext";
 import { useUser } from "../contexts/userContext";
 import { Link, useNavigate } from "react-router-dom";
 import Navigation2 from "./navigation2";
+import Navigation3 from "./navigation3";
 
 const PublicBudgetPlanPage = () => {
     const { state: { plans }, createPlan, getAllPlans } = useBudgetPlans();
@@ -39,6 +40,8 @@ const PublicBudgetPlanPage = () => {
 
     return (
         <div className="budget-plan-container">
+
+            <Navigation3/>
             <Navigation2 />
             
             {showForm && (

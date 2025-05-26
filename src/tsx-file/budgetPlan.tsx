@@ -4,6 +4,7 @@ import { useUser } from "../contexts/userContext";
 import { Link, useNavigate } from "react-router-dom";
 import Navigation2 from "./navigation2";
 import "../css/budgetPlan.css";
+import Navigation3 from "./navigation3";
 
 
 const BudgetPlanPage = () => {
@@ -40,7 +41,9 @@ const BudgetPlanPage = () => {
 
     return (
         <div className="budget-plan-container">
+            <Navigation3/>
             <Navigation2 />
+
             
             {showForm && (
                 <div className="overlay">
@@ -166,3 +169,4 @@ const BudgetPlanPage = () => {
 };
 
 export default BudgetPlanPage;
+

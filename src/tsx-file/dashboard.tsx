@@ -5,6 +5,7 @@ import Navigation2 from "./navigation2";
 import { Link } from "react-router-dom";
 import "../css/dashboard.css";
 import { useFundRequests } from "../contexts/fundRequestContext";
+import Navigation3 from "./navigation3";
 
 
 const Dashboard = () => {
@@ -23,6 +24,7 @@ const Dashboard = () => {
 
     return (
         <div className="page-container">
+            <Navigation3/>
             <Navigation2 
                 collapsed={isNavCollapsed} 
                 onToggleCollapse={() => setIsNavCollapsed(!isNavCollapsed)}
