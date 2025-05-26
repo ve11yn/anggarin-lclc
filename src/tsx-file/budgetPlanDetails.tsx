@@ -19,6 +19,10 @@ const BudgetPlanDetailsPage = () => {
   const {state : userState} = useUser();
   const [memberDetails, setMemberDetails] = useState<UserDetails[]>([]);
   const navigate = useNavigate();
+  const isOwner = plan?.ownerId === userState.uid;
+  const [showDiscardModal, setShowDiscardModal] = useState(false);
+
+
   const handleJoinPlan = async () => {
     if (!userState.uid || !planId) {
       alert('Please login to join this plan');
@@ -72,6 +76,7 @@ const BudgetPlanDetailsPage = () => {
     
     loadMemberDetails();
     }, [plan]);
+
 
   if (!plan) return <div>Loading...</div>;
 
@@ -147,8 +152,36 @@ const BudgetPlanDetailsPage = () => {
               <div className="detail-members-count">
                   Members: {plan.members.length}
               </div>
+
+              <div className="action-buttons" style={{paddingTop:'20px'}}>
+            {isOwner ? (
+                <>
+                    <button 
+                        className="danger-button"
+                        onClick={() => setShowDiscardModal(true)}
+                    >
+                        Discard Plan
+                    </button>
+                    <button className="secondary-button">
+                        Generate Report
+                    </button>
+                </>
+            ) : (
+                <button 
+                    className="primary-button"
+                    onClick={() => navigate(`/fund-requests/${planId}/create`)}
+                >
+                    + Request
+                </button>
+            )}
+            
+        </div>
           </div>
       </div>
+     
+          
+                     
+          
           </div>
 
           <div className="latest-events">
@@ -199,11 +232,18 @@ const BudgetPlanDetailsPage = () => {
                     Create Request
                     </Link>
                 )}
-            </div> */}
+                </div> */}
         </div>
 
+
         
-      </div>
+
+
+                
+                  
+                </div>
+          
+
     </div>
   );
 };

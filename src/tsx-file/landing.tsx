@@ -7,20 +7,20 @@ const Landing = () => {
             <Navigation1 />
 
             {/* Hero Section (no box) */}
-            <section id="section1">
+            <section id="landing-section1">
                 <h1>Tracking Every <b>Rupiah</b>,</h1>
                 <h1>Securing Every <b>Purpose</b></h1>
-                <div id="section1-button">
+                <div id="landing-section1-button">
                     <button>Track Public Budget Plans</button>
                     <button>Create Budget Plan</button>
                 </div>
             </section>
 
             {/* Combined Info, How We Work, and Testimonials Section */}
-            <section className="info-how-testimonials-section">
-                <div className="stats-description">
+            <section className="landing-info-how-testimonials-section">
+                <div className="landing-stats-description">
                     <h2>Trusted by</h2>
-                    <div className="stats-row">
+                    <div className="landing-stats-row">
                         <div>
                             <h2>100</h2>
                             <p>Donors</p>
@@ -30,16 +30,16 @@ const Landing = () => {
                             <p>Beneficiaries</p>
                         </div>
                     </div>
-                    <p className="description-text">
+                    <p className="landing-description-text">
                         Our platform helps organizations and individuals track how donation
                         funds are collected, distributed, and used — all recorded transparently
                         on the blockchain. Eliminate ambiguity, ensure accountability, and build
                         trust in every transaction.
                     </p>
                 </div>
-                <div className="how-we-work">
+                <div className="landing-how-we-work">
                     <h2>How we work</h2>
-                    <div className="how-steps">
+                    <div className="landing-how-steps">
                         <div>
                             <h1>1</h1>
                             <h3>Create a Budget Plan</h3>
@@ -62,21 +62,21 @@ const Landing = () => {
                         </div>
                     </div>
                 </div>
-                <div className="testimonials">
-                    <div className="testimonial-left">
+                <div className="landing-testimonials">
+                    <div className="landing-testimonial-left">
                         <h2>What People Say</h2>
-                        <p className="testimonial-intro">Discover what our satisfied customers have to say about their experiences with our service.</p>
-                        <button className="try-now-btn">Try Now</button>
+                        <p className="landing-testimonial-intro">Discover what our satisfied customers have to say about their experiences with our service.</p>
+                        <button className="landing-try-now-btn">Try Now</button>
                     </div>
 
-                    <div className="testimonial-right">
+                    <div className="landing-testimonial-right">
 
-                        <div className="testimonial-cards">
-                            <div className="testimonial-card">
+                        <div className="landing-testimonial-cards">
+                            <div className="landing-testimonial-card">
                                 <p>"This platform has restored my confidence in charitable giving. I can see exactly how my donations are used."</p>
                                 <span>— Aisyah M., Donor</span>
                             </div>
-                            <div className="testimonial-card">
+                            <div className="landing-testimonial-card">
                                 <p>"Our university fundraising events are now more credible. Transparency has boosted both trust and engagement."</p>
                                 <span>— Reza T., Student Organization Treasurer</span>
                             </div>

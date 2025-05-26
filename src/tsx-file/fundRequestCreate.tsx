@@ -5,6 +5,7 @@ import { useUser } from "../contexts/userContext";
 import { useState } from "react";
 import Navigation2 from "./navigation2";
 import { useBudgetPlans } from "../contexts/budgetPlanContext";
+import "../css/fundRequestCreate.css"
 
 const CreateFundRequest = () => {
   const { planId } = useParams();
@@ -91,51 +92,62 @@ const CreateFundRequest = () => {
 
   return (
     <div className="create-request-container">
-      <Navigation2 />
-      <h2>Create New Fund Request</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Amount (Rp):</label>
-          <input
-            type="number"
-            min="1"
-            step="0.01"
-            value={formData.amount}
-            onChange={(e) => setFormData({...formData, amount: e.target.value})}
-            placeholder="Enter amount"
-            required
-            disabled={isSubmitting}
-          />
-        </div>
-        
-        <div>
-          <label>Description:</label>
-          <textarea
-            value={formData.description}
-            onChange={(e) => setFormData({...formData, description: e.target.value})}
-            placeholder="Purpose of request"
-            rows={4}
-            required
-            disabled={isSubmitting}
-          />
-        </div>
-        
-        <button 
-          type="submit" 
-          disabled={isSubmitting}
-        >
-          {isSubmitting ? 'Creating...' : 'Submit Request'}
-        </button>
-        
-        <button 
-          type="button" 
-          onClick={() => navigate(`/budgetplan/${planId}`)}
-          disabled={isSubmitting}
-        >
-          Cancel
-        </button>
-      </form>
+    <Navigation2 />
+
+    
+    <div className="confirmation-modal" style={{ position: 'static', background: 'none' }}>
+      <div className="modal-content">
+        <h2 style={{ marginBottom: '1.5rem', color: '#1f2937' }}>Create New Fund Request</h2>
+        <form onSubmit={handleSubmit} className="request-form">
+          <div className="form-group">
+            <label>Amount (Rp)</label>
+            <input
+              type="number"
+              min="1"
+              step="0.01"
+              value={formData.amount}
+              onChange={(e) => setFormData({...formData, amount: e.target.value})}
+              placeholder="Enter amount"
+              required
+              disabled={isSubmitting}
+              className="form-input"
+            />
+          </div>
+          
+          <div className="form-group">
+            <label>Description</label>
+            <textarea
+              value={formData.description}
+              onChange={(e) => setFormData({...formData, description: e.target.value})}
+              placeholder="Purpose of request"
+              rows={4}
+              required
+              disabled={isSubmitting}
+              className="form-textarea"
+            />
+          </div>
+          
+          <div className="modal-actions">
+            <button 
+              type="button" 
+              onClick={() => navigate(`/budgetplan/${planId}`)}
+              className="secondary-button"
+              disabled={isSubmitting}
+            >
+              Cancel
+            </button>
+            <button 
+              type="submit" 
+              className="primary-button"
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? 'Creating...' : 'Submit'}
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
+  </div>
   );
 };
 

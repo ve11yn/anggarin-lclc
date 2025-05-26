@@ -11,10 +11,10 @@
     box-sizing: border-box;
     overflow-y: auto;
     height: fit-content;
-    padding-top: 2200px;
+    padding-top: 2000px;
 }
 
-#section1 {
+#landing-section1 {
     margin: 0 auto 100px auto;
     width: 100%;
     max-width: 900px;
@@ -25,20 +25,20 @@
     padding: 48px 24px 36px 24px;
 }
 
-#section1 h1 {
+#landing-section1 h1 {
     font-size: 2.5rem;
     margin: 0.2em 0;
     color: #222;
 }
 
-#section1-button {
+#landing-section1-button {
     margin-top: 32px;
     display: flex;
     gap: 18px;
     justify-content: center;
 }
 
-#section1-button button {
+#landing-section1-button button {
     border: 1.5px solid #222;
     background: #fff;
     color: #222;
@@ -50,12 +50,12 @@
     transition: background 0.2s, color 0.2s;
 }
 
-#section1-button button:hover {
+#landing-section1-button button:hover {
     background: grey;
     color: #fff;
 }
 
-.info-how-testimonials-section {
+.landing-info-how-testimonials-section {
     width: 100%;
     max-width: 1100px;
     margin: 40px auto 0 auto;
@@ -70,28 +70,28 @@
     row-gap: 150px;
 }
 
-.stats-description {
+.landing-stats-description {
     text-align: center;
 }
 
-.stats-row {
+.landing-stats-row {
     display: flex;
     justify-content: center;
     gap: 80px;
     margin: 18px 0 10px 0;
 }
 
-.stats-description h2 {
+.landing-stats-description h2 {
     margin-bottom: 4px;
     color: #111;
 }
 
-.stats-description p {
+.landing-stats-description p {
     color: #444;
     font-size: 1.1rem;
 }
 
-.how-we-work {
+.landing-how-we-work {
     width: 100%;
     text-align: center;
     display: flex;
@@ -100,14 +100,14 @@
     justify-content: center;
 }
 
-.how-steps {
+.landing-how-steps {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 28px;
     width: 80%;
 }
 
-.how-steps>div {
+.landing-how-steps>div {
     background: #fff;
     backdrop-filter: blur(10px);
     border-radius: 12px;
@@ -121,22 +121,22 @@
     justify-self: center;
 }
 
-.how-steps h1 {
+.landing-how-steps h1 {
     color: black;
 }
 
-.how-steps h3 {
+.landing-how-steps h3 {
     margin: 0 0 10px 0;
     font-size: 1.15rem;
     color: #111;
 }
 
-.how-steps p {
+.landing-how-steps p {
     max-width: 60%;
     text-align: center;
 }
 
-.testimonials {
+.landing-testimonials {
     width: 100%;
     text-align: center;
     margin-top: 24px;
@@ -144,23 +144,23 @@
     flex-direction: row;
 }
 
-.testimonials p .testimonials h2 {
+.landing-testimonials p .landing-testimonials h2 {
     font-size: 2rem;
     margin-bottom: 10px;
     color: #fff;
 }
 
-.testimonial-left p {
+.landing-testimonial-left p {
     color: white;
 }
 
-.testimonial-intro {
+.landing-testimonial-intro {
     color: #fff;
     margin-bottom: 28px;
     font-size: 1.08rem;
 }
 
-.testimonial-cards {
+.landing-testimonial-cards {
     display: flex;
     flex-direction: row;
     gap: 28px;
@@ -168,7 +168,7 @@
     margin-bottom: 24px;
 }
 
-.testimonial-card {
+.landing-testimonial-card {
     background: #fff;
     border-radius: 10px;
     padding: 28px 32px;
@@ -180,14 +180,14 @@
     text-align: left;
 }
 
-.testimonial-card span {
+.landing-testimonial-card span {
     display: block;
     margin-top: 15px;
     color: #666;
     font-size: 0.97rem;
 }
 
-.try-now-btn {
+.landing-try-now-btn {
     padding: 10px 30px;
     border-radius: 20px;
     border: 1.5px solid #222;
@@ -199,45 +199,45 @@
     transition: background 0.2s, color 0.2s;
 }
 
-.try-now-btn:hover {
+.landing-try-now-btn:hover {
     background: grey;
     color: #fff;
 }
 
 @media (max-width: 900px) {
-    .how-steps,
-    .testimonial-cards {
+    .landing-how-steps,
+    .landing-testimonial-cards {
         flex-direction: column;
         display: flex;
         gap: 18px;
         align-items: center;
     }
-    .how-steps {
+    .landing-how-steps {
         grid-template-columns: 1fr;
     }
 }
 
 @media (max-width: 600px) {
     #section1,
-    .info-how-testimonials-section {
+    .landing-info-how-testimonials-section {
         padding: 18px 4px;
     }
-    .testimonial-cards {
+    .landing-testimonial-cards {
         gap: 10px;
     }
 }
 
-.description-text {
+.landing-description-text {
     text-align: center;
     max-width: 800px;
     margin: 0 auto;
     line-height: 1.6;
 }
 
-.info-how-testimonials-section,
-.testimonials,
-.how-we-work,
-.stats-description {
+.landing-info-how-testimonials-section,
+.landing-testimonials,
+.landing-how-we-work,
+.landing-stats-description {
     width: 100%;
     max-width: 1200px;
     margin-left: auto;
@@ -249,16 +249,16 @@
     align-items: center;
 }
 
-.stats-description p {
+.landing-stats-description p {
     max-width: 600px;
     text-align: center;
 }
 
-.testimonials h2 {
+.landing-testimonials h2 {
     color: white;
 }
 
-.stats-description {
+.landing-stats-description {
     justify-content: center;
     align-items: center;
 }
