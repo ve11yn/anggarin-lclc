@@ -10,13 +10,12 @@
     justify-content: center;
     background: #fff;
     box-sizing: border-box;
-    overflow: visible;
 }
 
 #section1 {
+    margin: 0 auto 100px auto;
     width: 100%;
     max-width: 900px;
-    margin: 200px auto 100px auto;
     text-align: center;
     background: none;
     border-radius: 0;
@@ -260,13 +259,4 @@
 .stats-description {
     justify-content: center;
     align-items: center;
-}
-
-html,
-body {
-    overflow-x: hidden;
-    overflow-y: auto;
-    /* Ensures vertical scrolling is enabled */
-    height: auto;
-    /* Don't restrict height */
 }
