@@ -9,12 +9,13 @@
     justify-content: center;
     background: #fff;
     box-sizing: border-box;
+    padding-top: 100px; 
 }
 
 #section1 {
+    margin: 0 auto 100px auto;
     width: 100%;
     max-width: 900px;
-    margin: 200px auto 100px auto;
     text-align: center;
     background: none;
     border-radius: 0;
@@ -258,4 +259,8 @@
 .stats-description {
     justify-content: center;
     align-items: center;
+}
+
+html {
+  scroll-padding-top: 80px; /* match navbar height */
 }
