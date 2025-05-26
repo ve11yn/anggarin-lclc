@@ -1,23 +1,22 @@
+// fundRequestContext.tsx - Fixed Version
 import { collection, deleteDoc, doc, getDoc, getDocs, query, setDoc, updateDoc, where } from "firebase/firestore";
 import { createContext, ReactNode, useContext, useReducer } from "react";
 import { db } from "../main";
-import { useBudgetPlans } from "./budgetPlanContext";
-
 
 export interface FundRequest {
     requestId: string;
     planId: string;
-    requesterId: string; // user uid who made the request
+    requesterId: string;
     requesterName: string;
-    fundAmount: number;  // Changed from string to number for monetary value
+    fundAmount: number;
     description: string;    
     status: 'pending' | 'approved' | 'rejected' | 'completed';
     createdAt: string;
     updatedAt: string;
     approvedAt?: string;
     approverId?: string;
-    transactionHash?: string; // blockchain hash 
-    rejectionReason?: string; // Added for rejected requests
+    transactionHash?: string;
+    rejectionReason?: string;
 }
 
 interface FundRequestState {
@@ -30,11 +29,11 @@ type FundRequestAction =
     | { type: "SET_CURRENT_REQUEST"; payload: FundRequest }
     | { type: "ADD_REQUEST"; payload: FundRequest }
     | { type: "UPDATE_REQUEST"; payload: FundRequest }
-    | { type: "DELETE_REQUEST"; payload: string }; // requestId
+    | { type: "DELETE_REQUEST"; payload: string };
 
 const FundRequestContext = createContext<{
     state: FundRequestState;
-    createRequest: (request: Omit<FundRequest, "requestId" | "status" | "createdAt" | "updatedAt"> & {requesterName: string}) => Promise<string>;
+    createRequest: (request: Omit<FundRequest, "requestId" | "status" | "createdAt" | "updatedAt">) => Promise<string>;
     getRequest: (requestId: string) => Promise<FundRequest | null>;
     approveRequest: (requestId: string, approverId: string, updatePlanFunds: (planId: string, amount: number) => Promise<void>) => Promise<void>;
     rejectRequest: (requestId: string, rejectorId: string, reason?: string) => Promise<void>;
@@ -82,42 +81,76 @@ export const FundRequestProvider = ({ children }: { children: ReactNode }) => {
     });
 
     const createRequest = async (request: Omit<FundRequest, "requestId" | "status" | "createdAt" | "updatedAt">) => {
-        const requestRef = doc(collection(db, "fundRequest"));
-        const newRequest: FundRequest = {
-            ...request,
-            requestId: requestRef.id,
-            requesterName: request.requesterName,
-            status: "pending",
-            createdAt: new Date().toISOString(),
-            updatedAt: new Date().toISOString()
-        };
+        try {
+            // Validate required fields
+            if (!request.planId || !request.requesterId || !request.requesterName) {
+                throw new Error('Missing required fields');
+            }
+            
+            if (!request.fundAmount || request.fundAmount <= 0) {
+                throw new Error('Invalid fund amount');
+            }
+            
+            if (!request.description || request.description.trim() === '') {
+                throw new Error('Description is required');
+            }
 
-        await setDoc(requestRef, newRequest);
-        dispatch({ type: "ADD_REQUEST", payload: newRequest });
-        return requestRef.id;
+            const requestRef = doc(collection(db, "fundRequest"));
+            const now = new Date().toISOString();
+            
+            const newRequest: FundRequest = {
+                ...request,
+                requestId: requestRef.id,
+                requesterName: request.requesterName.trim(),
+                description: request.description.trim(),
+                status: "pending",
+                createdAt: now,
+                updatedAt: now
+            };
+
+            console.log('Saving request to Firestore:', newRequest);
+            
+            await setDoc(requestRef, newRequest);
+            dispatch({ type: "ADD_REQUEST", payload: newRequest });
+            
+            return requestRef.id;
+        } catch (error) {
+            console.error('Error in createRequest:', error);
+            throw error;
+        }
     };
 
     const getRequest = async (requestId: string) => {
-        const requestSnap = await getDoc(doc(db, "fundRequest", requestId));
-        if (requestSnap.exists()) {
-            const request = requestSnap.data() as FundRequest;
-            dispatch({ type: "SET_CURRENT_REQUEST", payload: request });
-            return request;
+        try {
+            const requestSnap = await getDoc(doc(db, "fundRequest", requestId));
+            if (requestSnap.exists()) {
+                const request = requestSnap.data() as FundRequest;
+                dispatch({ type: "SET_CURRENT_REQUEST", payload: request });
+                return request;
+            }
+            return null;
+        } catch (error) {
+            console.error('Error getting request:', error);
+            throw error;
         }
-        return null;
     };
 
     const completeRequest = async (requestId: string, txHash: string) => {
-        const update: Partial<FundRequest> = {
-            status: "completed",
-            transactionHash: txHash,
-            updatedAt: new Date().toISOString()
-        };
-        
-        await updateDoc(doc(db, "fundRequest", requestId), update);
-        const updatedRequest = await getRequest(requestId);
-        if (updatedRequest) {
-            dispatch({ type: "UPDATE_REQUEST", payload: updatedRequest });
+        try {
+            const update: Partial<FundRequest> = {
+                status: "completed",
+                transactionHash: txHash,
+                updatedAt: new Date().toISOString()
+            };
+            
+            await updateDoc(doc(db, "fundRequest", requestId), update);
+            const updatedRequest = await getRequest(requestId);
+            if (updatedRequest) {
+                dispatch({ type: "UPDATE_REQUEST", payload: updatedRequest });
+            }
+        } catch (error) {
+            console.error('Error completing request:', error);
+            throw error;
         }
     };
 
@@ -126,62 +159,103 @@ export const FundRequestProvider = ({ children }: { children: ReactNode }) => {
         approverId: string,
         updatePlanFunds: (planId: string, amount: number) => Promise<void>
     ) => {
-        const requestRef = doc(db, "fundRequest", requestId);
-        const requestSnap = await getDoc(requestRef);
-        const request = requestSnap.data() as FundRequest;
-      
-        // Update request status
-        await updateDoc(requestRef, {
-            status: "approved",
-            approverId,
-            approvedAt: new Date().toISOString()
-        });
-      
-        // Update plan funds using injected function
-        await updatePlanFunds(request.planId, -request.fundAmount);
+        try {
+            const requestRef = doc(db, "fundRequest", requestId);
+            const requestSnap = await getDoc(requestRef);
+            
+            if (!requestSnap.exists()) {
+                throw new Error('Request not found');
+            }
+            
+            const request = requestSnap.data() as FundRequest;
+          
+            // Update request status
+            await updateDoc(requestRef, {
+                status: "approved",
+                approverId,
+                approvedAt: new Date().toISOString(),
+                updatedAt: new Date().toISOString()
+            });
+          
+            // Update plan funds using injected function
+            await updatePlanFunds(request.planId, -request.fundAmount);
+            
+            // Refresh the request data
+            const updatedRequest = await getRequest(requestId);
+            if (updatedRequest) {
+                dispatch({ type: "UPDATE_REQUEST", payload: updatedRequest });
+            }
+        } catch (error) {
+            console.error('Error approving request:', error);
+            throw error;
+        }
     };
 
-      // Keep rejectRequest in FundRequestContext
-const rejectRequest = async (
-    requestId: string, 
-    rejectorId: string, 
-    reason?: string  // Make reason optional
-) => {
-    const requestRef = doc(db, "fundRequest", requestId);
-    await updateDoc(requestRef, {
-        status: "rejected",
-        approverId: rejectorId,
-        rejectionReason: reason || "No reason provided",  // Handle undefined case
-        updatedAt: new Date().toISOString()
-    });
-};
-
+    const rejectRequest = async (
+        requestId: string, 
+        rejectorId: string, 
+        reason?: string
+    ) => {
+        try {
+            const requestRef = doc(db, "fundRequest", requestId);
+            await updateDoc(requestRef, {
+                status: "rejected",
+                approverId: rejectorId,
+                rejectionReason: reason || "No reason provided",
+                updatedAt: new Date().toISOString()
+            });
+            
+            // Refresh the request data
+            const updatedRequest = await getRequest(requestId);
+            if (updatedRequest) {
+                dispatch({ type: "UPDATE_REQUEST", payload: updatedRequest });
+            }
+        } catch (error) {
+            console.error('Error rejecting request:', error);
+            throw error;
+        }
+    };
 
     const getPlanRequests = async (planId: string) => {
-        const q = query(
-            collection(db, "fundRequest"),
-            where("planId", "==", planId)
-        );
-        const snapshot = await getDocs(q);
-        const requests = snapshot.docs.map(doc => doc.data() as FundRequest);
-        dispatch({ type: "SET_REQUESTS", payload: requests });
-        return requests;
+        try {
+            const q = query(
+                collection(db, "fundRequest"),
+                where("planId", "==", planId)
+            );
+            const snapshot = await getDocs(q);
+            const requests = snapshot.docs.map(doc => doc.data() as FundRequest);
+            dispatch({ type: "SET_REQUESTS", payload: requests });
+            return requests;
+        } catch (error) {
+            console.error('Error getting plan requests:', error);
+            throw error;
+        }
     };
 
     const getUserRequests = async (userId: string) => {
-        const q = query(
-            collection(db, "fundRequest"),
-            where("requesterId", "==", userId)
-        );
-        const snapshot = await getDocs(q);
-        const requests = snapshot.docs.map(doc => doc.data() as FundRequest);
-        dispatch({ type: "SET_REQUESTS", payload: requests });
-        return requests;
+        try {
+            const q = query(
+                collection(db, "fundRequest"),
+                where("requesterId", "==", userId)
+            );
+            const snapshot = await getDocs(q);
+            const requests = snapshot.docs.map(doc => doc.data() as FundRequest);
+            dispatch({ type: "SET_REQUESTS", payload: requests });
+            return requests;
+        } catch (error) {
+            console.error('Error getting user requests:', error);
+            throw error;
+        }
     };
 
     const deleteRequest = async (requestId: string) => {
-        await deleteDoc(doc(db, "fundRequest", requestId));
-        dispatch({ type: "DELETE_REQUEST", payload: requestId });
+        try {
+            await deleteDoc(doc(db, "fundRequest", requestId));
+            dispatch({ type: "DELETE_REQUEST", payload: requestId });
+        } catch (error) {
+            console.error('Error deleting request:', error);
+            throw error;
+        }
     };
 
     return (
@@ -189,8 +263,7 @@ const rejectRequest = async (
             state,
             createRequest,
             getRequest,
-            approveRequest: (requestId, approverId, updatePlanFunds) => 
-                approveRequest(requestId, approverId, updatePlanFunds),
+            approveRequest,
             rejectRequest,
             completeRequest,
             getPlanRequests,
