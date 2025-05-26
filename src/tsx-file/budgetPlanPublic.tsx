@@ -3,7 +3,6 @@ import { useBudgetPlans } from "../contexts/budgetPlanContext";
 import { useUser } from "../contexts/userContext";
 import { Link, useNavigate } from "react-router-dom";
 import Navigation2 from "./navigation2";
-import "../css/budgetPlanPublic.css";
 
 const PublicBudgetPlanPage = () => {
     const { state: { plans }, createPlan, getAllPlans } = useBudgetPlans();
@@ -120,9 +119,9 @@ const PublicBudgetPlanPage = () => {
                         <div key={plan.planId} className="plan-card" onClick={() => navigate(`/budgetplan/${plan.planId}`)}>
 
 
-                            <h3>{plan.title}</h3>
+                            <h3 style={{fontSize: '1.2rem'}}>{plan.title}</h3>
 
-                            
+
                             
                             <div className="chart-container">
 

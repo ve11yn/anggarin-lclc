@@ -62,6 +62,7 @@ const Dashboard = () => {
                                         width: '100%',
                                         textDecoration: 'none',
                                         color: 'inherit',
+                                        paddingTop: '15px'
                                         }}>
                                         <div className="plan-card-left">
                                             <h4 style={{marginBottom: '0.5rem'}}>{plan.title}</h4>

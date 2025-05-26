@@ -121,7 +121,7 @@ const BudgetPlanPage = () => {
                         <div key={plan.planId} className="plan-card" onClick={() => navigate(`/budgetplan/${plan.planId}`)}>
 
 
-                            <h3>{plan.title}</h3>
+                            <h3 style={{fontSize: '1.2rem'}}>{plan.title}</h3>
                             
                             <div className="chart-container">
 

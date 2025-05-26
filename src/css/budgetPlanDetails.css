@@ -1,281 +1,370 @@
-/* Budget Plan Details Page */
-
 .budgetplan-details-container {
-    padding: 2rem;
-    margin-left: 250px;
-    background: #f8f9fa;
-    min-height: 100vh;
+    width: 100vw;
+    height: 100vh;
 }
 
-.header-section {
-    margin-bottom: 2rem;
-}
-
-.header-top {
+.details-header-section {
+    height: 120px;
+    background: linear-gradient(to right, #747E98, #173782);
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    margin-bottom: 1rem;
+    padding: 0.2rem 6rem;
+    color: white;
+    margin-bottom: 1.5rem;
+    justify-content: space-between;
 }
 
-.back-button {
-    background: none;
-    border: none;
-    color: #007bff;
-    cursor: pointer;
-    font-size: 1rem;
+.details-header-left {}
+
+.details-header-right h3,
+h4 {
+    margin: 0px 0px;
 }
 
-.header-actions {
-    display: flex;
-    gap: 1rem;
+.details-header-left span {
+    font-size: 0.6rem;
+    font-weight: 300;
+    border: 1px solid white;
+    border-radius: 10px;
+    padding: 5px;
 }
 
-.generate-report,
-.discard-plan {
-    padding: 0.75rem 1.5rem;
-    border-radius: 6px;
+
+/* .header h2 {
     font-weight: 500;
-}
-
-.generate-report {
-    background: #28a745;
+    font-size: 1.2rem;
     color: white;
 }
 
-.discard-plan {
-    background: #dc3545;
+.header h2 b {
+    font-weight: 700;
     color: white;
-}
+} */
 
-.plan-metadata {
+.details-content {
+    width: 100%;
+    /* Changed from 100vw to prevent horizontal overflow */
+    /* Increased vertical padding */
     display: flex;
-    gap: 1rem;
-    align-items: center;
-    color: #6c757d;
+    flex-direction: column;
+    margin-top: -25px;
+    /* Stack children vertically */
+    /* Space between grid and other content */
 }
 
-.private-badge,
-.head-badge {
-    padding: 0.25rem 0.75rem;
-    border-radius: 20px;
-    font-size: 0.85rem;
-}
-
-.private-badge {
-    background: #e9ecef;
-    color: #495057;
-}
-
-.head-badge {
-    background: #007bff;
-    color: white;
-}
-
-
-/* Progress Section */
-
-.progress-section {
-    margin-bottom: 2rem;
-}
-
-.progress-bar {
-    height: 10px;
-    background: #e9ecef;
-    border-radius: 5px;
-    overflow: hidden;
-}
-
-.progress-fill {
-    height: 100%;
-    background: #007bff;
-    transition: width 0.3s ease;
-}
-
-.progress-labels {
+.details-content-grid {
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
-    margin-top: 0.5rem;
-    color: #6c757d;
-    font-size: 0.9rem;
-}
-
-
-/* Content Grid */
-
-.content-grid {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
     gap: 2rem;
+    /* Space between grid items */
+    padding: 2rem;
+    /* Inner spacing */
+    border-radius: 8px;
+    /* Soften edges */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    /* Add depth */
+    min-height: 400px;
 }
 
 
-/* Left Column Styles */
+/* If you're using grid items */
 
-.budget-categories {
+.details-content-grid>* {
+    border: 1px solid #dee2e6;
+    flex: 1;
+    /* Make items equal width */
+    max-width: calc(33.33% - 1rem);
+    /* For 3-column layout */
     background: white;
     padding: 1.5rem;
-    border-radius: 12px;
-    margin-bottom: 2rem;
+    border-radius: 6px;
 }
 
-.category-item {
-    margin-bottom: 1.5rem;
+
+/* Fund Requests Styles */
+
+.latest-events {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 24px;
+    margin-bottom: 32px;
 }
 
-.category-header {
+.latest-events h3 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #111827;
+    margin: 0 0 24px 0;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.request-item {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 0.5rem;
+    align-items: center;
+    padding: 16px 0;
+    border-bottom: 1px solid #f3f4f6;
 }
 
-.category-bar {
-    height: 6px;
-    background: #007bff;
-    border-radius: 3px;
-}
-
-
-/* Request Cards */
-
-.request-card {
-    background: white;
-    padding: 1rem;
-    border-radius: 8px;
-    margin-bottom: 1rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+.request-item:last-child {
+    border-bottom: none;
 }
 
 .request-header {
     display: flex;
-    justify-content: space-between;
-    margin-bottom: 0.5rem;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
 }
 
-.requester {
+.request-header span:first-child {
     font-weight: 500;
+    color: #111827;
+    font-size: 16px;
 }
 
-.date {
-    color: #6c757d;
+.request-header span:first-child::after {
+    content: " - ";
+    color: #6b7280;
+    font-weight: normal;
+}
+
+.request-header span:first-child::after {
+    content: attr(data-position);
+    font-style: italic;
+    color: #6b7280;
+    font-weight: normal;
 }
 
 .request-details {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    gap: 16px;
+    font-size: 14px;
+    color: #6b7280;
+    margin-top: 4px;
 }
 
-.status {
-    padding: 0.25rem 0.75rem;
+.request-details span:first-child {
+    font-weight: 500;
+}
+
+.request-status {
+    padding: 4px 12px;
     border-radius: 20px;
-    font-size: 0.85rem;
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: lowercase;
+    margin-left: 16px;
 }
 
-.status.approved {
-    background: #d4edda;
-    color: #155724;
+.request-status.pending {
+    background-color: #fef3c7;
+    color: #92400e;
+    border: 1px solid #fde68a;
 }
 
-.status.pending {
-    background: #fff3cd;
-    color: #856404;
+.request-status.approved {
+    background-color: #d1fae5;
+    color: #065f46;
+    border: 1px solid #a7f3d0;
+}
+
+.request-status.rejected {
+    background-color: #fee2e2;
+    color: #991b1b;
+    border: 1px solid #fecaca;
+}
+
+.view-details {
+    color: #3b82f6;
+    text-decoration: none;
+    font-size: 14px;
+    margin-top: 4px;
+    display: inline-block;
+}
+
+.view-details:hover {
+    color: #1d4ed8;
+    text-decoration: underline;
 }
 
 
-/* Right Column Styles */
+/* Members List Styles */
 
-.members-section {
+.members-list {
     background: white;
-    padding: 1.5rem;
-    border-radius: 12px;
-    margin-bottom: 2rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 24px;
 }
 
-.member-card {
-    padding: 1rem 0;
-    border-bottom: 1px solid #eee;
+.members-list h3 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #111827;
+    margin: 0 0 24px 0;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #e5e7eb;
 }
 
-.member-card:last-child {
+.member-item {
+    display: flex;
+    align-items: center;
+    padding: 16px 0;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.member-item:last-child {
     border-bottom: none;
 }
 
+.member-avatar {
+    width: 48px;
+    height: 48px;
+    background-color: #d1d5db;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 16px;
+    flex-shrink: 0;
+}
+
+.member-avatar span {
+    color: #6b7280;
+    font-weight: 500;
+    font-size: 14px;
+}
+
 .member-info {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 0.5rem;
+    flex: 1;
 }
 
-.member-main {
-    display: flex;
-    flex-direction: column;
-}
-
-.name {
+.member-info span:first-child {
     font-weight: 500;
+    color: #111827;
+    font-size: 16px;
+    display: block;
+    margin-bottom: 4px;
 }
 
-.role {
-    color: #6c757d;
-    font-size: 0.9rem;
+.member-info span:first-child::after {
+    content: " - ";
+    color: #6b7280;
+    font-weight: normal;
 }
 
-.contribution {
-    font-weight: 500;
-    color: #28a745;
+.member-position {
+    font-style: italic;
+    color: #6b7280;
+    font-weight: normal;
 }
 
 .member-contact {
     display: flex;
+    gap: 8px;
+    font-size: 14px;
+    color: #6b7280;
+    align-items: center;
+}
+
+.member-contact span:nth-child(2) {
+    color: #d1d5db;
+}
+
+
+/* Alternative layout without profile pictures */
+
+.member-item-no-avatar {
+    display: flex;
     justify-content: space-between;
-    color: #6c757d;
-    font-size: 0.85rem;
+    align-items: flex-start;
+    padding: 16px 0;
+    border-bottom: 1px solid #f3f4f6;
 }
 
-.create-request-button {
-    display: block;
-    width: 100%;
-    text-align: center;
-    background: #007bff;
-    color: white;
-    padding: 1rem;
-    border-radius: 8px;
-    text-decoration: none;
-    transition: background 0.2s;
+.member-item-no-avatar:last-child {
+    border-bottom: none;
 }
 
-.create-request-button:hover {
-    background: #0056b3;
-    color: white;
+.member-info-no-avatar {
+    flex: 1;
 }
 
-
-/* Modal Styles (create separate component) */
-
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
+.member-name-position {
     display: flex;
     align-items: center;
-    justify-content: center;
+    gap: 8px;
+    margin-bottom: 4px;
 }
 
-.modal-content {
-    background: white;
-    padding: 2rem;
-    border-radius: 8px;
-    max-width: 400px;
-    width: 90%;
+.member-name-position .name {
+    font-weight: 500;
+    color: #111827;
+    font-size: 16px;
 }
 
-.modal-actions {
+.member-name-position .separator {
+    color: #6b7280;
+}
+
+.member-name-position .position {
+    font-style: italic;
+    color: #6b7280;
+}
+
+.member-contact-info {
     display: flex;
-    gap: 1rem;
-    margin-top: 1.5rem;
-    justify-content: flex-end;
+    gap: 16px;
+    font-size: 14px;
+    color: #6b7280;
+}
+
+.member-contact-info .divider {
+    color: #d1d5db;
+}
+
+
+/* Responsive Design */
+
+@media (max-width: 768px) {
+    .request-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+    .request-status {
+        margin-left: 0;
+        align-self: flex-end;
+    }
+    .member-contact {
+        flex-direction: column;
+        gap: 4px;
+        align-items: flex-start;
+    }
+    .member-contact-info {
+        flex-direction: column;
+        gap: 4px;
+    }
+}
+
+.request-status.pending {
+    background-color: #fef3c7;
+    color: #92400e;
+    border: 1px solid #fde68a;
+}
+
+.request-status.approved {
+    background-color: #d1fae5;
+    color: #065f46;
+    border: 1px solid #a7f3d0;
+}
+
+.request-status.rejected {
+    background-color: #fee2e2;
+    color: #991b1b;
+    border: 1px solid #fecaca;
 }

@@ -78,19 +78,28 @@ const BudgetPlanDetailsPage = () => {
     <div className="budgetplan-details-container">
       <Navigation2 />
       
-      <div className="header-section">
-        <h2>{plan.title}</h2>
-        <div className="plan-metadata">
-          <span className="private-badge">Private</span>
-          <span>{plan.members.length} Members</span>
+      <div className="details-header-section">
+
+        <div className="details-header-left">
+          <h2>{plan.title}</h2>
+
+          <div style={{display: 'flex', flexDirection:'row', gap: '10px'}}>
+            <span className="private-badge">Private</span>
+            <span>{plan.members.length} Members</span>
+          </div>
+        </div>
+        <div className="details-header-right">
+          <p>PROJECT BUDGET</p>
+          <h3 style={{fontSize:'1.5rem'}}>Rp. {plan.remainingFund}</h3>
+          <h4>/ {plan.totalFund}</h4>
         </div>
       </div>
 
-      <div className="content-grid">
-        {/* Left Column */}
-        <div className="left-column">
+
+      <div className="details-content">
+        <div className="details-content-grid">
           <div className="budget-overview">
-            <h2>Budget Overview</h2>
+            <h3>Budget Overview</h3>
             <div className="budget-breakdown">
               <div className="budget-item">
                 <div>
@@ -107,7 +116,7 @@ const BudgetPlanDetailsPage = () => {
           </div>
 
           <div className="latest-events">
-            <h2>Latest Fund Requests</h2>
+            <h3>Latest Fund Requests</h3>
             {requests.map(request => (
               <div key={request.requestId} className="request-item">
                 <div className="request-header">
@@ -121,12 +130,8 @@ const BudgetPlanDetailsPage = () => {
               </div>
             ))}
           </div>
-        </div>
-
-        {/* Right Column */}
-        <div className="right-column">
           <div className="members-list">
-            <h2>Members</h2>
+            <h3>Members</h3>
             {memberDetails.map(member => (
                 <div key={member.uid} className="member-item">
                     <div className="member-info">
@@ -141,7 +146,7 @@ const BudgetPlanDetailsPage = () => {
             ))}
           </div>
 
-          <div className="actions">
+          {/* <div className="actions">
                 {!isMember && (
                     <button 
                     onClick={handleJoinPlan}
@@ -158,8 +163,10 @@ const BudgetPlanDetailsPage = () => {
                     Create Request
                     </Link>
                 )}
-            </div>
+            </div> */}
         </div>
+
+        
       </div>
     </div>
   );
