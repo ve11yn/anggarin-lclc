@@ -28,6 +28,8 @@
 
 .navigation2.collapsed {
     transform: translateX(-100%);
+    visibility: hidden;    
+    pointer-events: none;   
 }
 
 .navigation2.collapsed~#main-content-dashboard {
@@ -168,6 +170,11 @@
   color: #111;
 }
 
+.nav-open-btn:hover {
+  background: none !important;
+  color: #111;
+}
+
 /* Overlay covering the rest of the screen when nav open */
 .overlay {
   position: fixed;
@@ -184,6 +191,3 @@
   transition: transform 0.3s ease;
 }
 
-.navigation2.collapsed {
-  transform: translateX(-100%);
-}
