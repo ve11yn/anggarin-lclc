@@ -1,63 +1,281 @@
 /* Budget Plan Page Styles */
 
+
+/* Dashboard Layout */
+
+.page-container {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    background-color: #f8f9fa;
+    top: 0;
+}
+
+h2 {
+    color: white;
+    font-size: 1.2rem;
+}
+
+h3 {
+    font-size: 0.9rem;
+}
+
+h4 {
+    font-size: 0.75rem;
+}
+
+p {
+    font-size: 0.6rem;
+}
+
+span {
+    font-size: 0.6rem;
+}
+
+.header-button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header-button button {
+    padding: 0.5rem 2rem;
+    background-color: #0056b3;
+    font-size: 0.8rem;
+}
+
 .budget-plan-container {
     display: flex;
-    min-height: 100vh;
+    height: 100vh;
+    width: 100vw;
     background-color: #f8f9fa;
 }
 
 .create-plan-section,
 .personal-plans-section {
     flex: 1;
-    padding: 2rem 3rem;
-    margin-left: 250px;
+    padding: 3rem 6rem;
+}
+
+.personal-plans-section {
+    overflow-y: auto;
+    scrollbar-width: none;
+    /* Firefox */
+    max-height: calc(100vh - 100px);
+    /* Adjust as needed */
+}
+
+.personal-plans-section::-webkit-scrollbar {
+    display: none;
+    /* Chrome, Safari */
 }
 
 
-/* Create Plan Form */
+/* 
+<div className="plans-grid">
+    {myPlans.map(plan => (
+        <div key={plan.planId} className="plan-card" onClick={() => navigate(`/budgetplan/${plan.planId}`)}>
+            <h3>{plan.title}</h3>
+            <p>{plan.description}</p>
+            <div className="plan-stats">
+                <span>Total: Rp{plan.totalFund.toLocaleString()}</span>
+                <span>Remaining: Rp{plan.remainingFund.toLocaleString()}</span>
+                <span>Members: {plan.members.length}</span>
+            </div>
+            <Link to={`/fundRequest/${plan.planId}`}>
+                <button>Manage Requests</button>
+            </Link>
+        </div>
+    ))}
+</div>*/
 
-.create-plan-section h2 {
-    font-size: 2rem;
-    color: #2d3436;
-    margin-bottom: 2rem;
+.plans-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 }
 
-.create-plan-section form {
+.plan-card {
     background: white;
-    padding: 2rem;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    max-width: 600px;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    /* gap: 0.5rem; */
+    cursor: pointer;
 }
 
-.create-plan-section input,
-.create-plan-section textarea {
+.plan-card h3 {
+    font-size: 0.5rem;
+}
+
+.plan-stats {
+    display: flex;
+    flex-direction: row;
+}
+
+
+/* Donut Chart Styling */
+
+.chart-container {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    /* justify-content: space-between; */
+}
+
+.donut-chart {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.chart-circle {
     width: 100%;
-    padding: 0.8rem;
-    margin-bottom: 1.5rem;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    font-size: 1rem;
+    height: 100%;
+    border-radius: 50%;
+    background: #e0e0e0;
+    /* Grey background */
 }
 
-.create-plan-section textarea {
-    height: 100px;
-    resize: vertical;
+.chart-segment {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: conic-gradient(#1a237e 360deg);
+}
+
+.chart-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.total-text {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: #1a237e;
+}
+
+.total-label {
+    font-size: 0.5rem;
+    color: #616161;
+}
+
+.plan-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: center;
+    align-items: right;
+}
+
+
+/* 
+.remaining-fund .amount {
+    font-size: 1.4rem;
+    color: #616161;
+    font-weight: 600;
+}
+
+.remaining-fund .label {
+    font-size: 0.8rem;
+    color: #9e9e9e;
+}
+
+.members-count .count {
+    font-size: 1.2rem;
+    color: #1a237e;
+    font-weight: 600;
+}
+
+.members-count .label {
+    font-size: 0.8rem;
+    color: #9e9e9e;
+}
+
+.remaining-text {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+.remaining-label {
+    font-size: 0.8rem;
+    color: #7f8c8d;
+} */
+
+
+/* Plan Stats */
+
+.plan-stats {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.total-fund {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+}
+
+.members-count {
+    font-size: 0.9rem;
+    color: #7f8c8d;
+    margin-top: 10px;
+}
+
+
+/* Card Styling */
+
+.plan-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.plan-card:hover {
+    transform: translateY(-2px);
+}
+
+.plan-card h3 {
+    margin: 0 0 15px 0;
+    color: #2c3e50;
+    font-size: 0.5rem;
 }
 
 
 /* Plan Cards Grid */
 
 .personal-plans-section h2 {
-    font-size: 2rem;
     color: #2d3436;
     margin-bottom: 2rem;
 }
 
+
+/* 
 .plans-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 1.5rem;
+    gap: 1.2rem;
 }
 
 .plan-card {
@@ -74,73 +292,14 @@
 }
 
 .plan-card h3 {
-    font-size: 1.25rem;
     color: #2d3436;
     margin-bottom: 0.5rem;
 }
 
 .plan-card p {
     color: #6c757d;
-    font-size: 0.9rem;
     margin-bottom: 1rem;
-}
-
-
-/* Status Badges */
-
-.status-badges {
-    display: flex;
-    gap: 0.5rem;
-    margin-bottom: 1rem;
-}
-
-.status-badge {
-    padding: 0.25rem 0.75rem;
-    border-radius: 20px;
-    font-size: 0.8rem;
-    font-weight: 500;
-}
-
-.status-badge.private {
-    background: #e9ecef;
-    color: #495057;
-}
-
-.status-badge.head {
-    background: #007bff;
-    color: white;
-}
-
-
-/* Fund Display */
-
-.remaining-fund {
-    margin: 1.5rem 0;
-}
-
-.remaining-fund h4 {
-    color: #6c757d;
-    font-size: 0.9rem;
-    margin-bottom: 0.5rem;
-}
-
-.remaining-fund p {
-    font-size: 1.5rem;
-    color: #2d3436;
-    font-weight: 600;
-    margin: 0;
-}
-
-
-/* Members Count */
-
-.members-count {
-    color: #6c757d;
-    font-size: 0.9rem;
-    border-top: 1px solid #eee;
-    padding-top: 1rem;
-    margin-top: 1rem;
-}
+} */
 
 
 /* Buttons */
@@ -173,3 +332,233 @@ button:hover {
         grid-template-columns: 1fr;
     }
 }
+
+.plan-stats span {
+    font-size: 0.6rem;
+    border: 1px solid rgb(198, 198, 198);
+    border-radius: 6px;
+    padding: 1px 4px;
+}
+
+
+/* 
+.overlay {
+    background-color: white;
+    width: 100vw;
+    padding: 3rem 0rem;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.popup-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid grey;
+    width: 50%;
+    padding-bottom: 50px;
+}
+
+.popup-form h3 {
+    font-size: 1.5rem;
+}
+
+input,
+textarea {
+    width: 100%;
+    padding: 0.3rem 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 0.7rem;
+    font-family: inherit;
+    background-color: #fff;
+    color: #333;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+
+input:focus,
+textarea:focus {
+    border-color: #0056b3;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+    outline: none;
+}
+
+textarea {
+    min-height: 120px;
+    resize: vertical;
+} */
+
+
+/* Overlay Styles */
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    width: 100vw;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.popup-form {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.popup-form h2 {
+    color: #2d3436;
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+
+/* Form Layout */
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.form-group label {
+    font-size: 0.9rem;
+    color: #4a5568;
+    font-weight: 500;
+}
+
+
+/* Input Fields */
+
+input,
+textarea {
+    width: 100%;
+    padding: 0.4rem;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    transition: all 0.2s ease;
+}
+
+input:focus,
+textarea:focus {
+    border-color: #4299e1;
+    box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.2);
+    outline: none;
+}
+
+
+/* Form Actions */
+
+.form-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+    justify-content: flex-end;
+}
+
+.form-actions button {
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.form-actions button[type="submit"] {
+    background: #4299e1;
+    color: white;
+}
+
+.form-actions button[type="submit"]:hover {
+    background: #3182ce;
+}
+
+.form-actions button[type="button"] {
+    background: #f7fafc;
+    color: #4a5568;
+    border: 2px solid #e2e8f0;
+}
+
+.form-actions button[type="button"]:hover {
+    background: #ebf8ff;
+    border-color: #bee3f8;
+}
+
+
+/* Responsive Design */
+
+@media (max-width: 480px) {
+    .popup-form {
+        width: 95%;
+        padding: 1.5rem;
+    }
+    input,
+    textarea {
+        padding: 0.7rem;
+    }
+    .form-actions {
+        flex-direction: column;
+    }
+    .form-actions button {
+        width: 100%;
+    }
+}
+
+
+/*
+<div className="overlay">
+    <div className="popup-form">
+        <h2>{userState.name}'s Budget Plan</h2>
+        <form onSubmit={handleCreatePlan}>
+            <input
+                type="text"
+                placeholder="Title"
+                value={newPlan.title}
+                onChange={(e) => setNewPlan(p => ({...p, title: e.target.value}))}
+                required
+            />
+            <textarea
+                placeholder="Description"
+                value={newPlan.description}
+                onChange={(e) => setNewPlan(p => ({...p, description: e.target.value}))}
+                required
+            />
+            <input
+                type="number"
+                placeholder="Total Fund"
+                value={newPlan.totalFund}
+                onChange={(e) => setNewPlan(p => ({...p, totalFund: Number(e.target.value)}))}
+                required
+            />
+            <div className="form-actions">
+                <button type="submit">Create</button>
+                <button type="button" onClick={() => setShowForm(false)}>Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
+*/
+
+div>*/

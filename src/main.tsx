@@ -65,6 +65,7 @@ createRoot(document.getElementById('root')!).render(
             <Route path="/publicBudgetPlan" element={<PublicBudgetPlanPage/>}/>
             <Route path="/budgetPlan/:planId" element={<BudgetPlanDetailsPage />}   />
             <Route path="/fund-requests/:planId/create" element={<CreateFundRequest />} />
+            
           </Routes>
         </BrowserRouter>
         </FundRequestProvider>

@@ -3,13 +3,15 @@
     max-width: 1200px;
     min-height: 100vh;
     margin: 0 auto;
-    height: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     background: #fff;
     box-sizing: border-box;
+    overflow-y: auto;
+    height: fit-content;
+    padding-top: 2200px;
 }
 
 #section1 {
@@ -259,4 +261,10 @@
 .stats-description {
     justify-content: center;
     align-items: center;
+}
+
+body,
+html {
+    height: 100%;
+    overflow-y: auto;
 }

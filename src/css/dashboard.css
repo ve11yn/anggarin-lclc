@@ -2,15 +2,37 @@
 
 .page-container {
     display: flex;
-    min-height: 100vh;
-    min-width: 80vw;
+    width: 100vw;
+    height: 100vh;
     background-color: #f8f9fa;
+    top: 0;
+}
+
+h2 {
+    color: white;
+    font-size: 1.2rem;
+}
+
+h3 {
+    font-size: 0.9rem;
+}
+
+h4 {
+    font-size: 0.75rem;
+}
+
+p {
+    font-size: 0.6rem;
+}
+
+.plan-metrics span {
+    font-size: 0.6rem;
 }
 
 .main-content-dashboard {
     flex-grow: 1;
-    padding: 2rem 3rem;
-    margin-left: 250px;
+    padding: 0;
+    max-width: 100vw;
     transition: margin 0.3s ease;
 }
 
@@ -18,21 +40,57 @@
     margin-left: 80px;
 }
 
+.content-container {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 1rem;
+    padding: 0.75rem 6rem;
+}
+
 
 /* Header */
 
+.header .user-name {
+    color: white;
+}
+
+.header {
+    height: 120px;
+    background: linear-gradient(to right, #747E98, #173782);
+    display: flex;
+    align-items: center;
+    padding-left: 6rem;
+    color: white;
+    margin-bottom: 1.5rem;
+}
+
+.header span {
+    font-size: 1.2rem;
+    font-weight: 300;
+}
+
+.header h2 {
+    font-weight: 500;
+    font-size: 1.2rem;
+    color: white;
+}
+
+.header h2 b {
+    font-weight: 700;
+    color: white;
+}
+
 .main-content-dashboard h3 {
     color: #6c757d;
-    margin-bottom: 0.5rem;
-    font-size: 1.25rem;
+    margin-bottom: 0.4rem;
     font-weight: 400;
 }
 
 .main-content-dashboard h2 {
     color: #2d3436;
-    margin-bottom: 2rem;
-    font-size: 2rem;
+    margin-bottom: 1.2rem;
     font-weight: 600;
+    font-size: 1.2rem;
 }
 
 
@@ -41,80 +99,118 @@
 .fund-stats {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
-    margin-bottom: 3rem;
+    gap: 1rem;
+    margin-bottom: 2rem;
 }
 
 .total-budget,
 .remaining-budget {
     background: white;
-    padding: 2rem;
-    border-radius: 12px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    padding: 0.75rem;
+    border-radius: 10px;
+    border: 1px solid #dee2e6;
+    text-align: left;
 }
 
 .total-budget h2,
 .remaining-budget h2 {
     color: #2d3436;
-    font-size: 2rem;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.4rem;
+    font-size: 1.5rem;
     font-weight: 600;
+    margin-left: 20px;
 }
 
 .total-budget p,
 .remaining-budget p {
     color: #6c757d;
-    font-size: 1rem;
+    font-size: 0.65rem;
+    margin-left: 20px;
 }
 
 
 /* Budget Plans Section */
 
-.content-container {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 3rem;
+.your-plans {
+    background: white;
+    border-radius: 10px;
+    padding: 1.5rem;
+    border: 1px solid #dee2e6;
+    font-size: 0.75rem;
 }
 
 .your-plans h3 {
+    margin-bottom: 0.8rem;
+    font-size: 1rem;
     color: #2d3436;
-    margin-bottom: 1.5rem;
-    font-size: 1.5rem;
     font-weight: 600;
 }
+
+
+/* .plan-card {
+    background: #f9f9f9;
+    border-radius: 6px;
+    margin-bottom: 0.4rem;
+    border: 1px solid #e0e0e0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    padding: 0.75rem 1rem;
+} */
 
 .plan-card {
-    background: white;
-    border-radius: 8px;
-    padding: 1.5rem;
-    margin-bottom: 1.5rem;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e0e0e0;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 0.4rem;
+    justify-content: center;
+    padding: 0.1rem 0.1rem;
 }
 
-.plan-card h4 {
-    color: #2d3436;
-    font-size: 1.25rem;
-    margin-bottom: 0.5rem;
+.plan-card:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+link h4 {
+    font-size: 0.85rem;
+    margin-bottom: 0rem;
     font-weight: 600;
+    color: #333;
 }
 
 .plan-card p {
-    color: #6c757d;
-    font-size: 0.9rem;
-    margin-bottom: 1rem;
-    line-height: 1.5;
+    font-size: 0.6rem;
+    color: #666;
+    margin-bottom: 0.5rem;
+    line-height: 1.2;
 }
 
 .plan-metrics {
     display: flex;
-    justify-content: space-between;
-    color: #6c757d;
-    font-size: 0.9rem;
-    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    font-size: 0.65rem;
+    color: #555;
+    gap: 0.5rem;
+    margin-bottom: 0.3rem;
 }
 
 .plan-metrics span {
-    margin-right: 1.5rem;
+    font-size: 0.6rem;
+    border: 1px solid rgb(198, 198, 198);
+    border-radius: 6px;
+    padding: 1px 4px;
+}
+
+.plan-card button {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.65rem;
+    border-radius: 4px;
+    background-color: #0056b3;
+    color: white;
+    border: none;
+    cursor: pointer;
 }
 
 
@@ -122,17 +218,44 @@
 
 .inbox-preview {
     background: white;
-    border-radius: 8px;
-    padding: 1.5rem;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    border: 1px solid #ccc;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    font-size: 0.7rem;
 }
 
 .inbox-preview h3 {
-    color: #2d3436;
-    font-size: 1.5rem;
-    margin-bottom: 1.5rem;
-    font-weight: 600;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    font-size: 1rem;
 }
+
+.inbox-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #eee;
+}
+
+.inbox-preview button {
+    margin-top: auto;
+    width: 100%;
+    border-radius: 5px 5px;
+    font-size: 0.7rem;
+    background: #f9f9f9;
+    color: #0056b3;
+    font-weight: 500;
+}
+
+.inbox-preview button:hover {
+    background-color: lightgrey;
+}
+
+
+/* Table */
 
 .inbox-table {
     width: 100%;
@@ -140,9 +263,8 @@
 }
 
 .inbox-table td {
-    padding: 1rem 0;
+    padding: 0.8rem 0;
     border-bottom: 1px solid #eee;
-    font-size: 0.9rem;
 }
 
 .inbox-table tr:last-child td {
@@ -150,24 +272,25 @@
 }
 
 
-/* Buttons */
+/* Buttons
 
 button {
     background: #007bff;
     color: white;
     border: none;
-    padding: 0.75rem 1.5rem;
-    border-radius: 6px;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
     cursor: pointer;
-    font-size: 0.9rem;
     font-weight: 500;
+    font-size: 0.75rem;
     transition: all 0.2s;
 }
 
 button:hover {
-    background: #0056b3;
+    background: #6c757d;
     transform: translateY(-1px);
 }
+ */
 
 
 /* Responsive Design */
@@ -183,11 +306,11 @@ button:hover {
 
 @media (max-width: 768px) {
     .main-content-dashboard {
-        padding: 1.5rem;
+        padding: 1rem;
         margin-left: 0;
     }
     .plan-metrics {
         flex-direction: column;
-        gap: 0.5rem;
+        gap: 0.3rem;
     }
 }
