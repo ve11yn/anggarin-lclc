@@ -434,3 +434,16 @@ h4 {
     justify-content: center;
     align-items: right;
 }
+
+.primary-button {
+    font-size: 0.7rem;
+    background-color: #F7F1B9;
+    border: 1px solid #FFE500;
+    padding: 0.4rem 0.7rem;
+    color: black;
+}
+
+.primary-button:hover {
+    background-color: #FFE500;
+    border: 1px solid #FFE500;
+}

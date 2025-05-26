@@ -1,4 +1,4 @@
-import { arrayUnion, collection, doc, getDoc, getDocs, increment, query, setDoc, updateDoc, where } from "firebase/firestore";
+import { arrayRemove, arrayUnion, collection, deleteDoc, doc, getDoc, getDocs, increment, query, setDoc, updateDoc, where } from "firebase/firestore";
 import { createContext, ReactNode, useContext, useReducer } from "react";
 import { db } from "../main";
 import { FundRequest } from "./fundRequestContext";
@@ -30,6 +30,7 @@ type BudgetPlanAction =
     | { type: "ADD_MEMBER"; payload: { planId: string; userId: string } }
     | { type: "ADD_FUND_REQUEST"; payload: { planId: string; requestId: string } }
     | { type: "UPDATE_FUNDS"; payload: { planId: string; amount: number } };
+
 
 const BudgetPlanContext = createContext<{
     state: BudgetPlanState;
@@ -186,6 +187,8 @@ const budgetPlanReducer = (state: BudgetPlanState, action: BudgetPlanAction): Bu
         dispatch({ type: "SET_PLANS", payload: plans });
         return plans;
     };
+
+   
 
     return (
         <BudgetPlanContext.Provider value={{
