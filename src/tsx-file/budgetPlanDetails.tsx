@@ -99,7 +99,7 @@ const BudgetPlanDetailsPage = () => {
       <div className="details-content">
         <div className="details-content-grid">
           <div className="budget-overview" style={{ border: "none" }}>
-            <h3 style={{ fontSize: "1rem" }}>Budget Overview</h3>
+            <h3 style={{ fontSize: "1rem", paddingBottom: "30px"}}>Budget Overview</h3>
             {/* <div className="budget-breakdown">
               <div className="budget-item">
                 <div>
