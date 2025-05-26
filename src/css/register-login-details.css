@@ -1,176 +1,435 @@
-.login-container,
-.register-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    background-color: white;
-    border: 0.2px solid grey;
-    border-radius: 15px;
-    padding: 20px 30px;
-}
-
-.details-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 50%;
-    background-color: white;
-    border: 0.2px solid grey;
-    border-radius: 15px;
-    padding: 20px 10px;
-}
-
-.details-container button {
-    width: 100%;
-}
-
-.details-container h3 {
-    color: black;
-}
-
-.login-form-container,
-.register-form-container,
-.details-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 70%;
-}
-
-.login-form-container input,
-.register-form-container input,
-.form-group input {
-    margin-bottom: 10px;
-    padding: 10px;
-    border-radius: 4px;
-    width: 100%;
-    border: 1px solid #ccc;
-}
-
-.error-message {
-    color: red;
-    font-size: 0.8em;
-    margin-top: 20px;
-}
-
-.login-with-google {
-    width: 80%;
-    display: flex;
-}
-
-.main-content {
-    width: 100%;
-    max-width: 400px;
-    margin: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: auto;
-}
-
-.auth-title {
-    font-size: 2rem;
-    font-weight: 600;
-    margin-bottom: 32px;
-    color: #222;
-    text-align: center;
-}
-
-.auth-card {
-    width: 100%;
-    background: #fff;
-    border-radius: 16px;
-    padding: 36px 28px 28px 28px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 18px;
-}
-
-.auth-card input {
-    width: 100%;
-    margin-bottom: 14px;
-    padding: 12px 10px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    font-size: 1rem;
-    background: #fafafa;
-}
-
-.auth-card button {
-    width: 100%;
-    margin-top: 8px;
-    padding: 12px 0;
-    border-radius: 8px;
-    border: 1.5px solid #222;
-    background: #fff;
-    color: #222;
-    font-size: 1.1rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: background 0.2s, color 0.2s;
-}
-
-.auth-card button:hover {
-    background: grey;
-    color: #fff;
-}
-
-.auth-link {
-    margin-top: 18px;
-    text-align: center;
-    font-size: 1rem;
-}
-
-.auth-link a {
-    color: #646cff;
-    text-decoration: underline;
-}
-
-@media (max-width: 600px) {
-    .main-content {
-        max-width: 98vw;
-        padding: 0 4px;
-    }
-    .auth-card {
-        padding: 18px 6px 18px 6px;
-    }
+/* Reset and base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 html,
 body {
-    margin: 0;
-    padding: 0;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #f9f9f9;
-    /* optional, for contrast */
-}
-
-.main-content {
-    width: 100%;
-    max-width: 400px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    /* changed from flex-start */
-    min-height: auto;
-    /* optional: avoid enforcing height */
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100vh;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  overflow-x: hidden;
 }
 
 #root,
 .app-wrapper {
-    height: 100%;
-    display: flex;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+}
+
+/* Main container with gradient background */
+.main-content2 {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  background: linear-gradient(135deg, rgba(23, 55, 130, 1) 0%, #4a6bb3 50%, #8ba8d9 100%);
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  max-width: none;
+  min-height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Split layout container */
+.auth-layout {
+  display: flex;
+  width: 100%;
+  max-width: 1200px;
+  height: 100%;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 60px;
+  gap: 80px;
+}
+
+/* Left side - Branding */
+.auth-branding {
+  flex: 1;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.auth-logo {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 60px;
+}
+
+.auth-logo img {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 60px;
+  width: 70%;
+}
+
+.logo-icon {
+  width: 48px;
+  height: 48px;
+  background: white;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: bold;
+  color: #2d4a87;
+}
+
+.logo-text {
+  font-size: 32px;
+  font-weight: 300;
+  color: white;
+}
+
+.auth-tagline {
+  margin: 0;
+}
+
+.auth-tagline h2 {
+  font-size: 30px;
+  font-weight: 400;
+  margin: 0 0 8px 0;
+  line-height: 1.2;
+}
+
+.auth-tagline p {
+  font-size: 40px;
+  font-weight: 200;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.tagline-highlight {
+  font-size: 40px;
+  font-weight: 600;
+}
+
+.tagline-italic {
+  font-size: 40px !important;
+  font-style: italic;
+  font-weight: 300;
+}
+
+/* Right side - Form container */
+.auth-form-wrapper {
+  flex: 0 0 450px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Form card */
+.login-container,
+.register-container {
+  width: 100%;
+  max-width: 400px;
+  background: white;
+  border-radius: 20px;
+  padding: 40px 32px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: none;
+}
+
+.auth-title {
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0 0 32px 0;
+  color: #1a1a1a;
+  text-align: center;
+}
+
+.auth-title span {
+  color: #2d4a87;
+}
+
+.auth-card {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Google login button */
+.login-with-google {
+  width: 100%;
+  padding: 14px 20px;
+  border: 1.5px solid #e0e0e0;
+  border-radius: 8px;
+  background: white;
+  color: #333;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 0;
+}
+
+.login-with-google:hover {
+  border-color: #2d4a87;
+  background: #f8f9fa;
+}
+
+.login-with-google::before {
+  content: "G";
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  background-color: #1e3461;
+  color: white;
+  border-radius: 3px;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+/* Divider */
+.auth-card > p {
+  text-align: center;
+  color: #666;
+  margin: 8px 0;
+  position: relative;
+  font-size: 16px;
+}
+
+.auth-card > p::before,
+.auth-card > p::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 45%;
+  height: 1px;
+  background: #e0e0e0;
+}
+
+.auth-card > p::before {
+  left: 0;
+}
+
+.auth-card > p::after {
+  right: 0;
+}
+
+/* Form inputs */
+.login-form-container,
+.register-form-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 16px;
+}
+
+.login-form-container input,
+.register-form-container input {
+  width: 100%;
+  height: 80%
+  padding: 14px 16px;
+  border: 1.5px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 16px;
+  background: #fafafa;
+  transition: border-color 0.2s ease;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.login-form-container input:focus,
+.register-form-container input:focus {
+  outline: none;
+  border-color: #2d4a87;
+  background: white;
+}
+
+.login-form-container input::placeholder,
+.register-form-container input::placeholder {
+  color: #999;
+}
+
+/* Submit buttons */
+.login-form-container button,
+.register-form-container button {
+  width: 100%;
+  padding: 14px 20px;
+  background: #2d4a87;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  margin-top: 8px;
+}
+
+.login-form-container button:hover,
+.register-form-container button:hover {
+  background: #1e3461;
+}
+
+.login-form-container button:disabled,
+.register-form-container button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+/* Error message */
+.error-message {
+  color: #dc3545;
+  font-size: 14px;
+  text-align: center;
+  margin-top: 8px;
+  background: #ffeaea;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #f5c6cb;
+}
+
+/* Auth link */
+.auth-link {
+  text-align: center;
+  font-size: 14px;
+  color: #666;
+  margin-top: 24px;
+}
+
+.auth-link a {
+  color: #2d4a87;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.auth-link a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive design */
+@media (max-width: 1024px) {
+  .auth-layout {
+    padding: 0 40px;
+    gap: 40px;
+  }
+  
+  .auth-tagline h2,
+  .auth-tagline p {
+    font-size: 32px;
+  }
+}
+
+@media (max-width: 768px) {
+  .auth-layout {
+    flex-direction: column;
+    padding: 40px 20px;
+    gap: 40px;
+  }
+  
+  .auth-branding {
     align-items: center;
-    justify-content: center;
+    text-align: center;
+  }
+  
+  .auth-logo {
+    margin-bottom: 32px;
+  }
+  
+  .auth-tagline h2,
+  .auth-tagline p {
+    font-size: 28px;
+  }
+  
+  .auth-form-wrapper {
+    flex: none;
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  .login-container,
+  .register-container {
+    padding: 32px 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-content {
+    padding: 20px;
+  }
+  
+  .auth-layout {
+    padding: 20px;
+  }
+  
+  .auth-tagline h2,
+  .auth-tagline p {
+    font-size: 24px;
+  }
+  
+  .login-container,
+  .register-container {
+    padding: 24px 20px;
+  }
+  
+  .auth-title {
+    font-size: 20px;
+  }
+}
+
+/* Details container (keeping your existing styles) */
+.details-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  background-color: white;
+  border: 0.2px solid grey;
+  border-radius: 15px;
+  padding: 20px 10px;
+}
+
+.details-container button {
+  width: 100%;
+}
+
+.details-container h3 {
+  color: black;
+}
+
+.details-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 70%;
+}
+
+.form-group input {
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 4px;
+  width: 100%;
+  border: 1px solid #ccc;
 }

@@ -6,7 +6,7 @@ import { doc, getDoc } from "firebase/firestore";
 import { db } from "../main";
 import "../css/register-login-details.css";
 import "../css/index.css";
-
+import logo from "../assets/anggarin.png"
 
 const Login = () => {
     const auth = getAuth();
@@ -110,33 +110,47 @@ const Login = () => {
     };
 
     return (
-        <div className="main-content">
-            <div className="login-container">
-                <h1 className="auth-title">Login to Anggar.in</h1>
-                <div className="auth-card">
-                    <button onClick={loginWithGoogle} className="login-with-google">
-                        {authingGoogle ? "Logging in..." : "Log in with Google"}
-                    </button>
-                    <p>or</p>
-                    <div className="login-form-container">
-                        <input 
-                            type="email"
-                            placeholder="Email"
-                            value={email}
-                            onChange={(e) => { setEmail(e.target.value); setError(""); }}
-                        />
-                        <input
-                            type="password"
-                            placeholder="Password"
-                            value={password}
-                            onChange={(e) => { setPassword(e.target.value); setError(""); }}
-                        />
-                        <button onClick={loginWithEmail}>
-                            {authingEmail ? "Logging in..." : "Log in"}
-                        </button>
+        <div className="main-content2">
+            <div className="auth-layout">
+                {/* Left side - Branding */}
+                <div className="auth-branding">
+                    <div className="auth-logo">
+                        <img src={logo} alt="Logo" />
                     </div>
-                    {error && <p className="error-message">{error}</p>}
-                    <p className="auth-link"><Link to="/register">Don't have an account? Create one here.</Link></p>
+                </div>
+
+                {/* Right side - Login Form */}
+                <div className="auth-form-wrapper">
+                    <div className="login-container">
+                        <h1 className="auth-title">Log in to your account</h1>
+                        <div className="auth-card">
+                            <button onClick={loginWithGoogle} className="login-with-google" disabled={authingGoogle}>
+                                {authingGoogle ? "Signing in..." : "Sign In with Google"}
+                            </button>
+                            <p>or</p>
+                            <div className="login-form-container">
+                                <input 
+                                    type="email"
+                                    placeholder="Email"
+                                    value={email}
+                                    onChange={(e) => { setEmail(e.target.value); setError(""); }}
+                                />
+                                <input
+                                    type="password"
+                                    placeholder="Password"
+                                    value={password}
+                                    onChange={(e) => { setPassword(e.target.value); setError(""); }}
+                                />
+                                <button onClick={loginWithEmail} disabled={authingEmail}>
+                                    {authingEmail ? "Logging in..." : "Log in"}
+                                </button>
+                            </div>
+                            {error && <p className="error-message">{error}</p>}
+                            <p className="auth-link">
+                                Do not have an account? <Link to="/register">Create Account</Link>
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

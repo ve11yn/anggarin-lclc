@@ -6,6 +6,7 @@ import { doc, setDoc } from "firebase/firestore";
 import { db } from "../main";
 import "../css/register-login-details.css";
 import "../css/index.css";
+import logo from "../assets/anggarin.png"
 
 const Register = () => {
     const auth = getAuth();
@@ -14,6 +15,10 @@ const Register = () => {
 
     const [authingEmail, setAuthingEmail] = useState(false);
     const [authingGoogle, setAuthingGoogle] = useState(false);
+    const [username, setUsername] = useState("");
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [birthdate, setBirthdate] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
@@ -62,6 +67,11 @@ const Register = () => {
             return;
         }
 
+        if (!username || !firstName || !lastName || !birthdate || !email || !password) {
+            setError("Please fill in all fields");
+            return;
+        }
+
         setAuthingEmail(true);
         setError("");
 
@@ -70,7 +80,12 @@ const Register = () => {
             const user = response.user;
             
             await setDoc(doc(db, "users", user.uid), {
+                uid: user.uid,
                 email: user.email,
+                username: username,
+                firstName: firstName,
+                lastName: lastName,
+                birthdate: birthdate,
                 createdAt: new Date().toISOString(),
                 provider: "email"
             });
@@ -79,7 +94,10 @@ const Register = () => {
                 type: "SET_USER", 
                 payload: { 
                     uid: user.uid,
-                    email: email 
+                    email: email,
+                    username: username,
+                    firstName: firstName,
+                    lastName: lastName,
                 } 
             });
             
@@ -92,39 +110,86 @@ const Register = () => {
     };
 
     return (
-        <div className="main-content">
-            <div className="register-container">
-                <h1 className="auth-title">Register to <span>Anggar.in</span></h1>
-                <div className="auth-card">
-                    <button onClick={registerWithGoogle} className="login-with-google">
-                        {authingGoogle ? "Registering..." : "Register with Google"}
-                    </button>
-                    <p>or</p>
-                    <div className="register-form-container">
-                        <input 
-                            type="email"
-                            placeholder="Email"
-                            value={email}
-                            onChange={(e) => { setEmail(e.target.value); setError(""); }}
-                        />
-                        <input
-                            type="password"
-                            placeholder="Password"
-                            value={password}
-                            onChange={(e) => { setPassword(e.target.value); setError(""); }}
-                        />
-                        <input
-                            type="password"
-                            placeholder="Confirm Password"
-                            value={confirmPassword}
-                            onChange={(e) => { setConfirmPassword(e.target.value); setError(""); }}
-                        />
-                        <button onClick={registerWithEmail}>
-                            {authingEmail ? "Registering..." : "Register"}
-                        </button>
+        <div className="main-content2">
+            <div className="auth-layout">
+                {/* Left side - Branding */}
+                <div className="auth-branding">
+                    <div className="auth-logo">
+                        <img src={logo} alt="Anggarin Logo" />
                     </div>
-                    {error && <p className="error-message">{error}</p>}
-                    <p className="auth-link"><Link to="/login">Already have an account? Login here.</Link></p>
+                    <div className="auth-tagline">
+                        <h2>Join for free.</h2>
+                        <p>Tracking Every <span className="tagline-highlight">Rupiah</span>,</p>
+                        <p>Securing Every <span className="tagline-italic">Purpose</span>.</p>
+                    </div>
+                </div>
+
+                {/* Right side - Register Form */}
+                <div className="auth-form-wrapper">
+                    <div className="register-container">
+                        <h1 className="auth-title">Create New Account</h1>
+                        <div className="auth-card">
+                            <button onClick={registerWithGoogle} className="login-with-google" disabled={authingGoogle}>
+                                {authingGoogle ? "Registering..." : "Register with Google"}
+                            </button>
+                            <p>or</p>
+                            <div className="register-form-container">
+                                <input 
+                                    type="text"
+                                    placeholder="Username"
+                                    value={username}
+                                    onChange={(e) => { setUsername(e.target.value); setError(""); }}
+                                />
+                                <div style={{ display: 'flex', gap: '12px' }}>
+                                    <input 
+                                        type="text"
+                                        placeholder="First Name"
+                                        value={firstName}
+                                        onChange={(e) => { setFirstName(e.target.value); setError(""); }}
+                                        style={{ flex: 1 }}
+                                    />
+                                    <input 
+                                        type="text"
+                                        placeholder="Last Name"
+                                        value={lastName}
+                                        onChange={(e) => { setLastName(e.target.value); setError(""); }}
+                                        style={{ flex: 1 }}
+                                    />
+                                </div>
+                                <input 
+                                    type="date"
+                                    placeholder="Birthdate"
+                                    value={birthdate}
+                                    onChange={(e) => { setBirthdate(e.target.value); setError(""); }}
+                                />
+                                <input 
+                                    type="email"
+                                    placeholder="Email"
+                                    value={email}
+                                    onChange={(e) => { setEmail(e.target.value); setError(""); }}
+                                />
+                                <input
+                                    type="password"
+                                    placeholder="Password"
+                                    value={password}
+                                    onChange={(e) => { setPassword(e.target.value); setError(""); }}
+                                />
+                                <input
+                                    type="password"
+                                    placeholder="Confirm Password"
+                                    value={confirmPassword}
+                                    onChange={(e) => { setConfirmPassword(e.target.value); setError(""); }}
+                                />
+                                <button onClick={registerWithEmail} disabled={authingEmail}>
+                                    {authingEmail ? "Registering..." : "Register"}
+                                </button>
+                            </div>
+                            {error && <p className="error-message">{error}</p>}
+                            <p className="auth-link">
+                                Already have an account? <Link to="/login">Login</Link>
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
