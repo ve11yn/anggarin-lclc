@@ -4,7 +4,7 @@ import { Bell } from "lucide-react";
 import "../css/navigation3.css";
 import logo from "../assets/anggarin-blue.jpg";
 
-const getPageNameFromPath = (pathname) => {
+const getPageNameFromPath = (pathname: string) => {
   const routePatterns = [
     { pattern: "/fund-requests/:planId/create", name: "Create Fund Request" },
     { pattern: "/budgetPlan/:planId", name: "Budget Plan Details" },
@@ -14,6 +14,7 @@ const getPageNameFromPath = (pathname) => {
     { pattern: "/budgetPlan", name: "Budget Plans" },
     { pattern: "/publicBudgetPlan", name: "Public Budget Plans" }, // Changed to match actual route
     { pattern: "/inbox", name: "Fund Request Inbox" },
+{ pattern: "/fundRequestDetail/:requestId", name: "Fund Request Details" },
     // Add more patterns as needed
   ];
 
@@ -24,7 +25,7 @@ const getPageNameFromPath = (pathname) => {
   return matchedRoute?.name || "Page";
 };
 
-const excludedPaths = ["/login", "/register", "/landing", "details"];
+const excludedPaths = ["/login", "/register", "/landing", "/details"];
 
 const Navigation3 = () => {
   const location = useLocation();

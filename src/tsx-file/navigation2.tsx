@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { UserContext } from "../contexts/userContext";
 import { Link, useLocation } from "react-router-dom";
 import "../css/navigation2.css";
+import logo from "../assets/anggarin-blue.jpg";
 
 import { Home, User, LogOut, Menu, LayoutDashboard, FileText, Users } from 'lucide-react';
 
@@ -43,7 +44,7 @@ const Navigation2 = () => {
       )}
 
       <nav className={`navigation2 ${isCollapsed ? "collapsed" : ""}`}>
-        <img src="src/assets/anggarin-blue.jpg" alt="Logo" className="logo" />
+        <img src={logo} alt="Logo" className="logo" />
 
         <div className="nav-links-2">
           <Link

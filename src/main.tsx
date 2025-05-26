@@ -19,6 +19,7 @@ import Inbox from "./tsx-file/inbox";
 import PublicBudgetPlanPage from "./tsx-file/budgetPlanPublic";
 import BudgetPlanDetailsPage from "./tsx-file/budgetPlanDetails";
 import CreateFundRequest from "./tsx-file/fundRequestCreate";
+import FundRequestDetail from "./tsx-file/fundRequestDetail";
 
 
 
@@ -66,7 +67,7 @@ createRoot(document.getElementById('root')!).render(
             <Route path="/publicBudgetPlan" element={<PublicBudgetPlanPage/>}/>
             <Route path="/budgetPlan/:planId" element={<BudgetPlanDetailsPage />}   />
             <Route path="/fund-requests/:planId/create" element={<CreateFundRequest />} />
-            
+            <Route path="/fundRequestDetail/:requestId" element={<FundRequestDetail />} />
           </Routes>
         </BrowserRouter>
         </FundRequestProvider>

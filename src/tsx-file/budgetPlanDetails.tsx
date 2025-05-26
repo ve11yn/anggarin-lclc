@@ -77,31 +77,29 @@ const BudgetPlanDetailsPage = () => {
 
   return (
     <div className="budgetplan-details-container">
-      <Navigation3/>
+      <Navigation3 />
       <Navigation2 />
-      
-      <div className="details-header-section">
 
+      <div className="details-header-section">
         <div className="details-header-left">
           <h2>{plan.title}</h2>
 
-          <div style={{display: 'flex', flexDirection:'row', gap: '10px'}}>
+          <div style={{ display: "flex", flexDirection: "row", gap: "10px" }}>
             <span className="private-badge">Private</span>
             <span>{plan.members.length} Members</span>
           </div>
         </div>
         <div className="details-header-right">
           <p>PROJECT BUDGET</p>
-          <h3 style={{fontSize:'1.5rem'}}>Rp. {plan.remainingFund}</h3>
+          <h3 style={{ fontSize: "1.5rem" }}>Rp. {plan.remainingFund}</h3>
           <h4>/ {plan.totalFund}</h4>
         </div>
       </div>
 
-
       <div className="details-content">
         <div className="details-content-grid">
-          <div className="budget-overview" style={{border:'none'}}>
-            <h3 style={{fontSize:'1rem'}}>Budget Overview</h3>
+          <div className="budget-overview" style={{ border: "none" }}>
+            <h3 style={{ fontSize: "1rem" }}>Budget Overview</h3>
             {/* <div className="budget-breakdown">
               <div className="budget-item">
                 <div>
@@ -116,69 +114,99 @@ const BudgetPlanDetailsPage = () => {
               </div>
             </div> */}
 
-      <div className="detail-chart-container">
-          <div className="detail-donut-chart">
-              <div className="detail-chart-circle">
-                  <div 
-                      className="detail-chart-segment"
-                      style={{
-                          background: `conic-gradient(
-                              #1a237e ${(plan.remainingFund / plan.totalFund) * 360}deg,
-                              #e0e0e0 ${(plan.remainingFund / plan.totalFund) * 360}deg 360deg
-                          )`
-                      }}
+            <div className="detail-chart-container">
+              <div className="detail-donut-chart">
+                <div className="detail-chart-circle">
+                  <div
+                    className="detail-chart-segment"
+                    style={{
+                      background: `conic-gradient(
+                              #1a237e ${
+                                (plan.remainingFund / plan.totalFund) * 360
+                              }deg,
+                              #e0e0e0 ${
+                                (plan.remainingFund / plan.totalFund) * 360
+                              }deg 360deg
+                          )`,
+                    }}
                   ></div>
-              </div>
-              <div className="detail-chart-center">
+                </div>
+                <div className="detail-chart-center">
                   <div className="detail-total-text">
-                      Rp. {plan.totalFund.toLocaleString()}
+                    Rp. {plan.totalFund.toLocaleString()}
                   </div>
                   <div className="detail-total-label">Total Fund</div>
+                </div>
               </div>
-          </div>
 
-          <div className="detail-plan-stats">
-              <div className="detail-stat-item">
+              <div className="detail-plan-stats">
+                <div className="detail-stat-item">
                   <h4 className="detail-stat-heading">Remaining</h4>
                   <span className="detail-stat-value">
-                      Rp. {plan.remainingFund.toLocaleString()}
+                    Rp. {plan.remainingFund.toLocaleString()}
                   </span>
-              </div>
-              <div className="detail-members-count">
+                </div>
+                <div className="detail-members-count">
                   Members: {plan.members.length}
+                </div>
               </div>
-          </div>
-      </div>
+            </div>
           </div>
 
           <div className="latest-events">
-            <h3 style={{fontSize:'1rem'}}>Fund Requests</h3>
-            {requests.map(request => (
-              <div key={request.requestId} className="request-item">
-                <div className="request-header">
-                  <span style={{fontSize: '0.7rem'}}>{request.requesterName}</span>
-                  <span>{new Date(request.createdAt).toLocaleDateString()}</span>
+            <h3 style={{ fontSize: "1rem" }}>Fund Requests</h3>
+            {requests.map((request) => {
+              const content = (
+                <div className="request-item">
+                  <div className="request-header">
+                    <span style={{ fontSize: "0.7rem" }}>
+                      {request.requesterName}
+                    </span>
+                    <span>
+                      {new Date(request.createdAt).toLocaleDateString()}
+                    </span>
+                  </div>
+                  <div className="request-details">
+                    <span>Rp{request.fundAmount.toLocaleString()}</span>
+                    <span className={`request-status ${request.status}`}>
+                      {request.status}
+                    </span>
+                  </div>
                 </div>
-                <div className="request-details">
-                  <span>Rp{request.fundAmount.toLocaleString()}</span>
-                  <span className={`request-status ${request.status}`}>{request.status}</span>
+              );
+
+              return request.status === "pending" ? (
+                <Link
+                  key={request.requestId}
+                  to={`/fundRequestDetail/${request.requestId}`}
+                  style={{ textDecoration: "none", color: "inherit" }}
+                >
+                  {content}
+                </Link>
+              ) : (
+                <div key={request.requestId}>{content}</div>
+              );
+            })}
+          </div>
+
+          <div className="members-list">
+            <h3 style={{ fontSize: "1rem" }}>Members</h3>
+            {memberDetails.map((member) => (
+              <div key={member.uid} className="member-item">
+                <div className="member-info">
+                  <span style={{ fontSize: "1rem", marginBottom: "0px" }}>
+                    <b>{member.name}</b>
+                  </span>
+                  <span>{member.position}</span>
+                </div>
+                <div className="member-contact">
+                  <span>{member.email}</span>
+                  <span>
+                    Joined:{" "}
+                    {new Date(member.joinDate || "").toLocaleDateString()}
+                  </span>
                 </div>
               </div>
-            ))}
-          </div>
-          <div className="members-list">
-            <h3 style={{fontSize:'1rem'}}>Members</h3>
-            {memberDetails.map(member => (
-                <div key={member.uid} className="member-item">
-                    <div className="member-info">
-                        <span style={{fontSize:'1rem', marginBottom:'0px'}}><b>{member.name}</b></span>
-                        <span>{member.position}</span>
-                    </div>
-                    <div className="member-contact">
-                      <span>{member.email}</span>
-                        <span>Joined: {new Date(member.joinDate || "").toLocaleDateString()}</span>
-                    </div>
-                </div>
             ))}
           </div>
 
@@ -201,8 +229,6 @@ const BudgetPlanDetailsPage = () => {
                 )}
             </div> */}
         </div>
-
-        
       </div>
     </div>
   );

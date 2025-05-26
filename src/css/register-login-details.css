@@ -31,7 +31,7 @@ body {
   width: 100vw;
   height: 100vh;
   display: flex;
-  background: linear-gradient(135deg, rgba(23, 55, 130, 1) 0%, #4a6bb3 50%, #8ba8d9 100%);
+  background: linear-gradient(135deg, rgba(23, 55, 130, 1) 0%, #4a6bb3 50%, white 100%);
   align-items: center;
   justify-content: center;
   padding: 0;

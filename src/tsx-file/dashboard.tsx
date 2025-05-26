@@ -56,7 +56,8 @@ const Dashboard = () => {
                                 <div key={plan.planId} className="plan-card" style={{paddingTop: '0.2rem',                                         paddingBottom:'0.5rem'
                                 }}>
 
-                                    <Link to={`/fundRequest/${plan.planId}`} className="link" 
+                                    <Link to={`/budgetPlan/${plan.planId}`} className="link" 
+                                    
                                     style={{
                                         display: 'flex',
                                         justifyContent: 'space-between',
