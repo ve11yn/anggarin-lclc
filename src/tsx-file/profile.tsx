@@ -27,22 +27,36 @@ const Profile: React.FC = () => {
   const [profileImage, setProfileImage] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchUser = async () => {
-      if (!state?.uid) return;
-      try {
-        const docRef = doc(db, "users", state.uid);
-        const docSnap = await getDoc(docRef);
-        if (docSnap.exists()) {
-          const data = docSnap.data();
-          setFormData(data as any);
-          setEditData(data as any);
-        }
-      } catch (error) {
-        console.error("Error fetching user data:", error);
+  const fetchUser = async () => {
+    if (!state?.uid) {
+      return;
+    }
+    try {
+      const docRef = doc(db, "users", state.uid);
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        const data = docSnap.data();
+        const userData = {
+          id: state.uid,
+          name: data?.name || "",
+          email: data?.email || "",
+          phone: data?.phone || "",
+          location: data?.location || "",
+          organization: data?.organization || "",
+          department: data?.department || "",
+          position: data?.position || "",
+          description: data?.description || "",
+        };
+        setFormData(userData);
+        setEditData(userData);
       }
-    };
-    fetchUser();
-  }, [state?.uid]);
+    } catch (error) {
+      console.error("Error fetching user data:", error);
+    }
+  };
+  fetchUser();
+}, [state?.uid]);
+
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
