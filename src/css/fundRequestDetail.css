@@ -1,200 +1,134 @@
 .fund-request-detail {
-  padding: 3rem 2rem;
+  padding: 2rem 1.5rem;
   min-height: 100vh;
-  background: #f8f9fa;
+  background: white;
+  padding-top: 200px;
 }
-
 .fund-request-content {
-  max-width: 1400px;
+  max-width: 1200px;
   margin: auto;
   background: white;
-  border-radius: 12px;
-  padding: 3rem;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 2rem;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
   border: 1px solid #e9ecef;
 }
-
 .fund-request-content h2 {
   color: #2d3748;
-  font-size: 2.5rem;
+  font-size: 2rem;
   font-weight: 700;
-  margin-bottom: 2.5rem;
+  margin-bottom: 2rem;
   text-align: center;
 }
-
 .detail-box {
-  background: #fafafa;
-  border-radius: 8px;
-  padding: 2.5rem;
-  margin-bottom: 2rem;
+  background: white;
+  border-radius: 6px;
+  padding: 2rem;
+  margin-bottom: 1.5rem;
   border: 1px solid #e2e8f0;
 }
-
 .detail-box p {
-  margin: 20px 0;
-  font-size: 1.1rem;
+  margin: 15px 0;
+  font-size: 0.8rem;
   line-height: 1.6;
-  color: #4a5568;
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 8px;
 }
-
 .detail-box p strong {
   color: #2d3748;
   font-weight: 600;
-  min-width: 120px;
-  font-size: 1rem;
+  min-width: 100px;
+  font-size: 0.9rem;
 }
-
 .status-badge {
-  padding: 8px 16px;
-  border-radius: 20px;
+  padding: 6px 12px;
+  border-radius: 16px;
   text-transform: capitalize;
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: 0.5rem;
   letter-spacing: 0.5px;
 }
-
 .status-badge.pending {
   background-color: #fff3cd;
   color: #856404;
   border: 1px solid #ffeaa7;
 }
-
 .status-badge.approved {
   background-color: #d4edda;
   color: #155724;
   border: 1px solid #c3e6cb;
 }
-
 .status-badge.rejected {
   background-color: #f8d7da;
   color: #721c24;
   border: 1px solid #f5c6cb;
 }
-
 .status-badge.completed {
   background-color: #cce5ff;
   color: #0056b3;
   border: 1px solid #b3d9ff;
 }
-
 .action-buttons {
   display: flex;
   justify-content: center;
-  gap: 2rem;
-  margin: 3rem 0;
+  gap: 1.5rem;
+  margin: 1rem 0;
 }
-
 .approve-button, .decline-button {
-  padding: 15px 40px;
+  padding: 12px 32px;
   border: none;
-  border-radius: 8px;
-  font-size: 1.1rem;
+  border-radius: 20px;
+  font-size: 0.7rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
 }
-
 .approve-button {
-  background-color: #28a745;
+  background-color: #173782;
   color: white;
 }
-
 .approve-button:hover {
-  background-color: #218838;
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
 }
-
 .decline-button {
-  background-color: #dc3545;
-  color: white;
+  background-color: white;
+  color: #173782;
 }
-
 .decline-button:hover {
-  background-color: #c82333;
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
+  background-color: white;
+  color: #173782;
 }
-
 .back-button {
-  margin-top: 30px;
+  margin-top: 24px;
   color: #6c757d;
-  padding: 12px 24px;
-  border: 1px solid #dee2e6;
-  border-radius: 8px;
+  border-radius: 6px;
   cursor: pointer;
+  margin-top: -40px;
   background-color: white;
   font-weight: 500;
   font-size: 1rem;
   transition: all 0.3s ease;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
 }
-
 .back-button:hover {
-  background-color: #f8f9fa;
-  border-color: #adb5bd;
+  background-color: #ffffff;
   transform: translateY(-1px);
 }
-
 /* Additional styling for better visual hierarchy */
 .detail-section {
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
 }
-
 .detail-section h3 {
   color: #2d3748;
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   font-weight: 600;
-  margin-bottom: 1rem;
-  padding-bottom: 0.5rem;
+  margin-bottom: 0.8rem;
+  padding-bottom: 0.4rem;
   border-bottom: 2px solid #e2e8f0;
-}
-
-/* Responsive design */
-@media (max-width: 768px) {
-  .fund-request-detail {
-    padding: 1.5rem 1rem;
-  }
-  
-  .fund-request-content {
-    max-width: 100%;
-    padding: 2rem 1.5rem;
-    border-radius: 15px;
-  }
-  
-  .fund-request-content h2 {
-    font-size: 2rem;
-  }
-  
-  .detail-box {
-    padding: 1.5rem;
-  }
-  
-  .detail-box p {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 5px;
-  }
-  
-  .detail-box p strong {
-    min-width: auto;
-  }
-  
-  .action-buttons {
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-  }
-  
-  .approve-button, .decline-button {
-    width: 100%;
-    max-width: 300px;
-  }
 }

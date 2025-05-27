@@ -72,7 +72,7 @@ const FundRequestDetail = () => {
       <Navigation2 />
       <div className="fund-request-content">
         <button onClick={() => navigate(-1)} className="back-button">←</button>
-        <h2>Fund Request Detail</h2>
+
         <div className="detail-box">
           <p><strong>Requester:</strong> {request.requesterName}</p>
           <p><strong>Date:</strong> {new Date(request.createdAt).toLocaleDateString()}</p>
