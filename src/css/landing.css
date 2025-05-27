@@ -11,7 +11,7 @@
     box-sizing: border-box;
     overflow-y: auto;
     height: fit-content;
-    padding-top: 2000px;
+    padding-top: 1500px;
 }
 
 #landing-section1 {
@@ -98,6 +98,12 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
+}
+
+.landing-how-we-work h2{
+    margin-bottom: 30px;
+    
 }
 
 .landing-how-steps {
@@ -105,9 +111,11 @@
     grid-template-columns: repeat(2, 1fr);
     gap: 28px;
     width: 80%;
+    align-items: stretch; /* 🆕 Make grid items stretch to equal height */
 }
 
-.landing-how-steps>div {
+
+.landing-how-steps > div {
     background: #fff;
     backdrop-filter: blur(10px);
     border-radius: 12px;
@@ -118,8 +126,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-self: center;
+    justify-content: flex-start;   /* 🧭 Ensure contents go top to bottom */
+    height: 100%;                  /* 🆕 Stretch height inside grid */
+    box-sizing: border-box;
+    width: 440.717407px;
 }
+
 
 .landing-how-steps h1 {
     color: black;
@@ -134,6 +146,7 @@
 .landing-how-steps p {
     max-width: 60%;
     text-align: center;
+    min-width: 60px; /* 🆕 Optional: fix minimum height for balance */
 }
 
 .landing-testimonials {
@@ -267,4 +280,9 @@ body,
 html {
     height: 100%;
     overflow-y: auto;
+}
+
+.landing-page h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
 }

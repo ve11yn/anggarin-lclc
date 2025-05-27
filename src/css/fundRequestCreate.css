@@ -54,7 +54,7 @@
 }
 
 .confirmation-modal {
-    padding: 2rem 2rem 2rem 1rem;
+    padding: 2rem 2rem 2rem 2rem;
     border: 1px solid #e5e7eb;
     border-radius: 10px;
     display: flex;

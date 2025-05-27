@@ -39,6 +39,10 @@ span {
     justify-content: space-between;
 }
 
+.header-button h2{
+    padding-top: 30px;
+}
+
 .header-button button {
     padding: 0.5rem 2rem;
     background-color: #173782;
