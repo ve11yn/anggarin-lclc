@@ -46,7 +46,7 @@ const Navigation2 = () => {
       <nav className={`navigation2 ${isCollapsed ? "collapsed" : ""}`}>
         <img src={logo} alt="Logo" className="logo" />
 
-        <div className="nav-links-2">
+        <div className="nav-links-2-section">
           <Link
             to="/dashboard"
             className={`nav-link${
@@ -86,8 +86,8 @@ const Navigation2 = () => {
         </div>
 
         <Link to="/landing" className="logout-btn">
-          <LogOut size={16} />
-          <span style={{ marginLeft: "8px" }}>Log Out</span>
+          <LogOut size={18} />
+          <span style={{ marginLeft: "8px", fontSize: "12px"}}>Log Out</span>
         </Link>
       </nav>
     </>
