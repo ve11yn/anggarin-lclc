@@ -25,14 +25,17 @@ const BudgetPlanPage = () => {
 
     const handleCreatePlan = async (e: React.FormEvent) => {
         e.preventDefault();
-        if (!userState.uid) return;
+        if (!userState.uid) {
+          return;
+        }
         
         await createPlan({
             ...newPlan,
             userId: userState.uid,
             members: [userState.uid],
             remainingFund: Number(newPlan.totalFund),
-            totalFund: Number(newPlan.totalFund)    
+            totalFund: Number(newPlan.totalFund),
+            ownerId: ""
         });
         setNewPlan({ title: '', description: '', totalFund: 0 });
     };
