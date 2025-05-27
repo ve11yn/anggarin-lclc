@@ -261,7 +261,7 @@ const BudgetPlanDetailsPage = () => {
             {memberDetails.map((member) => (
               <div key={member.uid} className="member-item">
                 <div className="member-info">
-                  <span style={{ fontSize: "1rem", marginBottom: "0px" }}>
+                  <span style={{ fontSize: "0.8rem", marginBottom: "0px" }}>
                     <b>{member.name}</b>
                   </span>
                   <span>{member.position}</span>
