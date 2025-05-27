@@ -47,7 +47,6 @@ const BudgetPlanDetailsPage = () => {
     }
   };
 
-  const isMember = plan?.members.includes(userState.uid);
 
   useEffect(() => {
     const loadData = async () => {
@@ -149,6 +148,13 @@ const BudgetPlanDetailsPage = () => {
                 <div className="detail-members-count">
                   Members: {plan.members.length}
                 </div>
+
+                <Link 
+                  to={`/fund-requests/${planId}/create`}
+                  className="primary-button" 
+                >
+                  + Request
+                </Link>
               </div>
             </div>
           </div>
