@@ -26,7 +26,46 @@ const BudgetPlanDetailsPage = () => {
   
   // Check if current user is the owner of the plan
   const isOwner = plan?.userId === userState.uid;
-
+  
+  useEffect(() => {
+    const loadData = async () => {
+      if (!planId) return;
+  
+      try {
+        // Always fetch fresh plan data
+        const planData = await getPlan(planId);
+        if (!planData) return;
+  
+        setPlan({
+          ...planData,
+          // Ensure numeric values
+          totalFund: Number(planData.totalFund),
+          remainingFund: Number(planData.remainingFund)
+        });
+  
+        // Load member details with error handling
+        const details = await Promise.all(
+          planData.members.map(async userId => {
+            try {
+              return await getUserDetails(userId);
+            } catch (error) {
+              console.error(`Failed to fetch user ${userId}:`, error);
+              return null;
+            }
+          })
+        );
+        setMemberDetails(details.filter(Boolean) as UserDetails[]);
+  
+        // Force refresh requests
+        await getPlanRequests(planId);
+  
+      } catch (error) {
+        console.error("Failed to load plan data:", error);
+      }
+    };
+  
+    loadData();
+  }, [planId, getPlan, getPlanRequests, requests.length]); // Add requests.length as dependency
   const handleJoinPlan = async () => {
     if (!userState.uid || !planId) {
       alert('Please login to join this plan');
@@ -56,7 +95,7 @@ const BudgetPlanDetailsPage = () => {
       alert('Failed to join plan');
     }
   };
-
+  
   const handleApprove = async (requestId: string) => {
     try {
       await approveRequest(requestId, userState.uid || '', updateFunds);
@@ -102,31 +141,6 @@ const BudgetPlanDetailsPage = () => {
     setSelectedRequest(null);
   };
 
-  useEffect(() => {
-    const loadData = async () => {
-      if (!planId) return;
-
-      try {
-        const planData = await getPlan(planId);
-        if (!planData) return;
-
-        setPlan(planData);
-
-        // Load member details
-        const details = await Promise.all(
-          planData.members.map(userId => getUserDetails(userId))
-        );
-        setMemberDetails(details);
-
-        // Load fund requests
-        await getPlanRequests(planId);
-      } catch (error) {
-        console.error("Failed to load plan data:", error);
-      }
-    };
-
-    loadData();
-  }, [planId]);
 
   if (!plan) return <div>Loading...</div>;
 
