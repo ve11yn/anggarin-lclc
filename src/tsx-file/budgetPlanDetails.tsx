@@ -60,17 +60,35 @@ const BudgetPlanDetailsPage = () => {
   }, [planId]);
 
   useEffect(() => {
-    const loadMemberDetails = async () => {
-        if (plan) {
-            const details = await Promise.all(
-                plan.members.map(userId => getUserDetails(userId))
-            );
-            setMemberDetails(details);
-        }
+    const loadData = async () => {
+      if (!planId) return;
+  
+      try {
+        // Load plan data
+        const planData = await getPlan(planId);
+        if (!planData) return;
+        setPlan(planData);
+  
+        // Load member details
+        const details = await Promise.all(
+          planData.members.map(userId => getUserDetails(userId))
+        );
+        setMemberDetails(details.filter(Boolean)); // Filter out any undefined/null results
+  
+        // Load fund requests
+        await getPlanRequests(planId);
+  
+      } catch (error) {
+        console.error("Failed to load plan data:", error);
+        // Consider adding error state handling here
+      }
     };
+  
+    loadData();
+  }, [planId, getPlan, getPlanRequests]); // Add dependencies here
+  
+
     
-    loadMemberDetails();
-    }, [plan]);
 
   if (!plan) return <div>Loading...</div>;
 
