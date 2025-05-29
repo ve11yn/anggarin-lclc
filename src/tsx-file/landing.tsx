@@ -23,15 +23,15 @@ const Landing = () => {
                     <div className="landing-stats-row">
                         <div>
                             <h2>100</h2>
-                            <p>Donors</p>
+                            <p>Users</p>
                         </div>
                         <div>
                             <h2>20</h2>
-                            <p>Beneficiaries</p>
+                            <p>Companies</p>
                         </div>
                     </div>
                     <p className="landing-description-text">
-                        Our platform helps organizations and individuals track how donation
+                        Our platform helps organizations and individuals track how
                         funds are collected, distributed, and used — all recorded transparently
                         on the blockchain. Eliminate ambiguity, ensure accountability, and build
                         trust in every transaction.
